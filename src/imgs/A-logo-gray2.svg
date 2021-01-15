@@ -7,13 +7,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="175.38049mm"
-   height="175.38103mm"
-   viewBox="0 0 175.3805 175.38103"
+   width="226.40775mm"
+   height="226.40775mm"
+   viewBox="0 0 226.40775 226.40775"
    version="1.1"
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="A-logo-white2.svg">
+   sodipodi:docname="A-logo-gray2.svg">
   <defs
      id="defs2">
     <font
@@ -42,10 +42,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497474"
-     inkscape:cx="162.98765"
-     inkscape:cy="436.81868"
+     inkscape:cx="255.55477"
+     inkscape:cy="535.24317"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="text2756"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -53,8 +53,8 @@
      fit-margin-bottom="0"
      inkscape:window-width="1390"
      inkscape:window-height="800"
-     inkscape:window-x="459"
-     inkscape:window-y="204"
+     inkscape:window-x="538"
+     inkscape:window-y="133"
      inkscape:window-maximized="0"
      inkscape:document-rotation="0" />
   <metadata
@@ -74,13 +74,19 @@
      id="layer4"
      inkscape:label="Layer 4"
      style="display:inline"
-     transform="translate(2.8345988,2.8347839)" />
+     transform="translate(28.348221,28.348145)">
+    <circle
+       style="opacity:0.97;fill:#000000;fill-opacity:0.764;fill-rule:nonzero;stroke:none;stroke-width:0.157632;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path5302"
+       cx="84.855652"
+       cy="84.855728"
+       r="113.20387" />
+  </g>
   <g
      inkscape:groupmode="layer"
      id="layer1"
      inkscape:label="Layer 5"
-     style="display:inline"
-     transform="translate(-25.513622,-25.513361)">
+     style="display:inline">
     <g
        aria-label="A"
        transform="translate(28.34822,28.348146)"
@@ -89,7 +95,7 @@
       <path
          d="M 106.31366,108.58829 H 63.569309 l -4.291601,10.729 h 4.291601 q 6.351571,0 9.012363,2.48913 2.746625,2.4033 2.746625,6.35157 0,3.86244 -2.746625,6.35157 -2.660792,2.4033 -9.012363,2.4033 h -23.68964 q -6.35157,0 -9.012363,-2.4033 -2.746625,-2.48913 -2.746625,-6.4374 0,-3.94828 2.832457,-6.4374 2.832457,-2.48913 9.355691,-2.31747 L 67.946743,50.480003 H 56.445251 q -6.35157,0 -9.098195,-2.403297 -2.660793,-2.489128 -2.660793,-6.437402 0,-3.948273 2.660793,-6.35157 2.746625,-2.489129 9.098195,-2.489129 l 38.023589,0.08583 35.01947,86.432853 q 6.1799,0 8.15404,1.37331 3.94827,2.83246 3.94827,7.46739 0,3.86244 -2.66079,6.35157 -2.66079,2.4033 -9.01236,2.4033 h -23.68964 q -6.351572,0 -9.098197,-2.4033 -2.660793,-2.48913 -2.660793,-6.4374 0,-3.86244 2.660793,-6.26574 2.746625,-2.48913 9.098197,-2.48913 h 4.2916 z M 99.017938,90.992721 84.855653,56.144917 70.607536,90.992721 Z"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:175.784px;font-family:monospace;-inkscape-font-specification:'monospace, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;stroke-width:4.39462"
-         id="path1423" />
+         id="path2000" />
     </g>
     <path
        style="display:inline;opacity:0.97;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"

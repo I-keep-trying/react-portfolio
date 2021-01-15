@@ -1,47 +1,16 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
 
-const Bio = ({ shevy }) => {
-  console.log('Bio shevy', shevy)
+const Bio = () => {
   let history = useHistory()
 
   useEffect(() => {
     history.push('/bio')
   }, [history])
-  /* 
-  const {
-    baseSpacing: bs,
-    h1: { fontSize, lineHeight, marginBottom }
-
-  } = shevy
- */
-  const Wrap = styled.div`
-    padding: ${shevy.baseSpacing()};
-    margin-bottom: ${shevy.baseSpacing(2)};
-  `
-
-  const Heading = styled.h1`
-    font-size: ${shevy.h1.fontSize};
-    line-height: ${shevy.h1.lineHeight};
-    margin-bottom: ${shevy.h1.marginBottom};
-  `
-  const Content = styled.p`
-    font-size: ${shevy.content.fontSize};
-    line-height: ${shevy.content.lineHeight};
-    margin-bottom: ${shevy.content.marginBottom};
-  `
 
   return (
     <div>
-      <Wrap>
-        <Heading>Shevy with Styled Components!</Heading>
-        <Heading>My Bio</Heading>
-        <Content>Bio content goes here.</Content>
-      </Wrap>
-      <p style={shevy.content}>
-        If I had anything to say for myself, this is where I would put it.
-      </p>
+      <p>If I had anything to say for myself, this is where I would put it.</p>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer elit
         felis, fermentum auctor tortor et, faucibus fringilla elit. Ut maximus

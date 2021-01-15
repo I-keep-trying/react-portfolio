@@ -1,6 +1,6 @@
 import React from 'react'
-import ContainerMenu from './ContainerMenu'
-import ContainerBody from './ContainerBody'
+import ContainerMenu from './VideosMenu'
+import ContainerBody from '../pages/Videos'
 
 const Container = () => {
   return (

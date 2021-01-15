@@ -1,10 +1,9 @@
 import React from 'react'
-import { Button } from 'semantic-ui-react'
 
 const Resume = () => {
   return (
     <div>
-      <Button
+     {/*  <Button
         color="teal"
         size="large"
         as="a"
@@ -13,7 +12,7 @@ const Resume = () => {
         rel="noopener noreferrer"
       >
         View Resume
-      </Button>
+      </Button> */}
       <iframe
         src="https://docs.google.com/document/d/11g4Rjr6Pguz2MVFf81_A8X4rokyZMo2PGLpFBlNo-tM/preview"
         title="Andrea Crego Resume"

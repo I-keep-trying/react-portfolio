@@ -1,7 +1,5 @@
 import React from 'react'
-import { Icon } from 'semantic-ui-react'
-import icon from '../logo.svg'
-import logo from '../A-logo-gray2.svg'
+import logo from '../imgs/A-logo-gray2.svg'
 
 const Homepage = () => {
   return (
@@ -14,17 +12,15 @@ const Homepage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Icon name="github" size="huge" />
         </a>
         <a
           href="https://twitter.com/Andrea_Crego"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Icon name="twitter" size="huge" />
         </a>
       </div>
-      <img src={logo} alt="logo" className="photo-medium" />
+      <img src={logo} alt="logo" className="photo-small" />
     </div>
   )
 }
