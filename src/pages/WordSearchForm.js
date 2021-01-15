@@ -261,105 +261,108 @@ const SearchForm = () => {
       </Accordion>
       <Flex width="Full" align="center" justifyContent="center">
         <Box w="90%" maxWidth="500px">
-          <Box my={4} textAlign="left">
-            <FormControl isRequired>
-              <InputGroup>
-                <InputLeftAddon children="Search" />
-                <Input
-                  type="text"
-                  placeholder="ba??"
-                  maxLength="30"
-                  value={userInput}
-                  onChange={({ target }) =>
-                    setUserInput(target.value.toLowerCase())
-                  }
-                />
-                {userInput.length > 0 ? (
-                  <InputRightElement
-                    children={
-                      <IconButton
-                        isRound
-                        aria-label="reset field"
-                        size="sm"
-                        icon={<CloseIcon onClick={resetInputField} />}
-                      />
+          <form onSubmit={handleSubmit}>
+            <Box my={4} textAlign="left">
+              <FormControl isRequired>
+                <InputGroup>
+                  <InputLeftAddon children="Search" />
+                  <Input
+                    type="text"
+                    placeholder="ba??"
+                    maxLength="30"
+                    value={userInput}
+                    onChange={({ target }) =>
+                      setUserInput(target.value.toLowerCase())
                     }
                   />
+                  {userInput.length > 0 ? (
+                    <InputRightElement
+                      children={
+                        <IconButton
+                          isRound
+                          aria-label="reset field"
+                          size="sm"
+                          icon={<CloseIcon onClick={resetInputField} />}
+                        />
+                      }
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </InputGroup>
+              </FormControl>
+
+              <FormControl mt={6}>
+                <InputGroup>
+                  <InputLeftAddon children="Exclude" />
+                  <Input
+                    type="text"
+                    maxLength="25"
+                    value={exclusions}
+                    placeholder="Letters to exclude from search query"
+                    onChange={({ target }) =>
+                      setExclusions(target.value.toLowerCase())
+                    }
+                  />
+                  {exclusions.length > 0 ? (
+                    <InputRightElement
+                      children={
+                        <IconButton
+                          isRound
+                          aria-label="reset field"
+                          size="sm"
+                          icon={<CloseIcon onClick={resetExclusionsField} />}
+                        />
+                      }
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </InputGroup>
+              </FormControl>
+            </Box>
+            <Box my={4} textAlign="left">
+              <ButtonGroup spacing="6">
+                <Button type="submit" onClick={handleSubmit}>
+                  Search
+                </Button>
+                <Modal isOpen={isOpen} onClose={onClose} isCentered>
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>{notify.title} </ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>{notify.msg} </ModalBody>
+                  </ModalContent>
+                </Modal>
+
+                {results.length > 0 ? (
+                  <>
+                    <Button onClick={handleSort}>{buttonText}</Button>
+                    <CopyToClipboard
+                      className="CopyToClipboard"
+                      text={copyResults()}
+                      onCopy={handleCopy}
+                    >
+                      <Button>{copiedButton} </Button>
+                    </CopyToClipboard>
+                    <Button onClick={resetForm}>Reset Form</Button>
+                  </>
                 ) : (
                   <></>
                 )}
-              </InputGroup>
-            </FormControl>
-            <FormControl mt={6}>
-              <InputGroup>
-                <InputLeftAddon children="Exclude" />
-                <Input
-                  type="text"
-                  maxLength="25"
-                  value={exclusions}
-                  placeholder="Letters to exclude from search query"
-                  onChange={({ target }) =>
-                    setExclusions(target.value.toLowerCase())
-                  }
-                />
-                {exclusions.length > 0 ? (
-                  <InputRightElement
-                    children={
-                      <IconButton
-                        isRound
-                        aria-label="reset field"
-                        size="sm"
-                        icon={<CloseIcon onClick={resetExclusionsField} />}
-                      />
-                    }
-                  />
-                ) : (
-                  <></>
-                )}
-              </InputGroup>
-            </FormControl>
-          </Box>
-          <Box my={4} textAlign="left">
-            <ButtonGroup spacing="6">
-              <Button type="submit" onClick={handleSubmit}>
-                Search
-              </Button>
-              <Modal isOpen={isOpen} onClose={onClose} isCentered>
-                <ModalOverlay />
-                <ModalContent>
-                  <ModalHeader>{notify.title} </ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>{notify.msg} </ModalBody>
-                </ModalContent>
-              </Modal>
+              </ButtonGroup>
 
-              {results.length > 0 ? (
-                <>
-                  <Button onClick={handleSort}>{buttonText}</Button>
-                  <CopyToClipboard
-                    className="CopyToClipboard"
-                    text={copyResults()}
-                    onCopy={handleCopy}
-                  >
-                    <Button>{copiedButton} </Button>
-                  </CopyToClipboard>
-                  <Button onClick={resetForm}>Reset Form</Button>
-                </>
-              ) : (
-                <></>
-              )}
-            </ButtonGroup>
-
-            <List
-              verticalAlign="middle"
-              value={results}
-              onChange={() => setCopied(false)}
-            >
-              {results?.map((obj) => (
-                <ListItem key={nanoid()}>{obj.word}</ListItem>
-              ))}
-            </List>
-          </Box>
+              <List
+                verticalAlign="middle"
+                value={results}
+                onChange={() => setCopied(false)}
+              >
+                {results?.map((obj) => (
+                  <ListItem key={nanoid()}>{obj.word}</ListItem>
+                ))}
+              </List>
+            </Box>
+          </form>
         </Box>
       </Flex>
     </>
