@@ -108,29 +108,6 @@ const Contact = () => {
     }
   }
 
-  const customDomains = [
-    '',
-    'yahoo.com',
-    'hotmail.com',
-    'gmail.com',
-    'me.com',
-    'aol.com',
-    'mac.com',
-    'live.com',
-    'googlemail.com',
-    'msn.com',
-    'facebook.com',
-    'verizon.net',
-    'outlook.com',
-    'icloud.com',
-    'rediffmail.com',
-    'zohomail.in',
-    'zoho.com',
-    'mail.com',
-    'protonmail.com',
-    'yandex.com',
-  ]
-
   return (
     <>
       <Center h="100px">
