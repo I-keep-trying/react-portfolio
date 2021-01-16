@@ -121,6 +121,7 @@ const Contact = () => {
                 <InputGroup>
                   <InputLeftAddon children="Name" />
                   <Input
+                    autofocus
                     type="text"
                     placeholder="User McUserface"
                     maxLength="30"

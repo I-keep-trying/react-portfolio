@@ -267,6 +267,7 @@ const SearchForm = () => {
                 <InputGroup>
                   <InputLeftAddon children="Search" />
                   <Input
+                    autofocus
                     type="text"
                     placeholder="ba??"
                     maxLength="30"
