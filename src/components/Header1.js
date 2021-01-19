@@ -10,9 +10,9 @@ import {
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import { NavLink } from 'react-router-dom'
-import Logo from '../Logo'
-import routes from '../../config/paths'
-import '../../App.css'
+import Logo from './Logo'
+import routes from '../config/paths'
+import '../App.css'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -21,12 +21,11 @@ const Header = () => {
 
   return (
     <Flex
-      as="nav"
       align="center"
       justify="space-between"
       wrap="wrap"
       w="100%"
-      mb={0}
+      mb={2}
       p={8}
     >
       <Logo />
@@ -44,10 +43,7 @@ const Header = () => {
 
 const MenuLinks = ({ isOpen, toggle }) => {
   return (
-    <Box
-      display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
-      flexBasis={{ base: '100%', md: 'auto' }}
-    >
+    <Box display={{ base: isOpen ? 'block' : 'none', md: 'block' }}>
       <Stack
         spacing={8}
         align="center"

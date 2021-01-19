@@ -1,5 +1,14 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import React, {
+  useState,
+  useMemo,
+  useContext,
+  createContext,
+  useReducer,
+  useRef,
+  useImperativeHandle,
+  forwardRef,
+} from 'react'
 import {
   Accordion,
   AccordionItem,
@@ -35,21 +44,23 @@ import {
   ModalCloseButton,
   useDisclosure,
   IconButton,
+  Grid,
+  useControllableState,
+  PinInput,
+  PinInputField,
   Text,
-  Tooltip
 } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
 import { stringDiff } from '../services/stringDiff'
-
 import { getWords } from '../services/dictionary'
+import SearchInput from '../components/SearchInput'
 
 const SearchForm = () => {
   const [results, setResults] = useState([])
   const [userInput, setUserInput] = useState('')
-  const [inputState, setInputState] = useState({ value: '' })
   const [exclusions, setExclusions] = useState('')
   // eslint-disable-next-line no-unused-vars
   const [copied, setCopied] = useState(false)
@@ -57,8 +68,22 @@ const SearchForm = () => {
   const [buttonText, setButtonText] = useState('Sort a-z')
   const [copiedButton, setCopiedButton] = useState('Copy List')
   const [notify, setNotify] = useState({ title: '', msg: '' })
+  const [loading, setLoading] = useState('false')
+
   const toast = useToast()
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const fields = useMemo(
+    () =>
+      Array.from({ length: 30 }, (_, index) => {
+        if (index % 2 === 0) {
+          return <PinInputField className="pin-input" key={nanoid()} />
+        } else {
+          return <PinInputField className="pin-input-alt" key={nanoid()} />
+        }
+      }),
+    []
+  )
 
   const handleSort = () => {
     const newResults = [...results]
@@ -120,6 +145,7 @@ const SearchForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log('userInput', userInput)
     setResults([])
     let wildcards1 = [...userInput.matchAll(/\?/g)]
     let numeric = userInput.match(/\d/g)
@@ -136,49 +162,21 @@ const SearchForm = () => {
       setTimeout(() => {
         onClose()
       }, 3000)
-    } else if (userInput.length > 10) {
-      onOpen()
-      setNotify({
-        title: 'Whoa hang on a minute',
-        msg:
-          'Word search is limited to 30 characters or less. Please adjust search accordingly.',
-      })
-      setTimeout(() => {
-        onClose()
-      }, 3000)
-    } else if (exclusions.length > 25) {
-      onOpen()
-      setNotify({
-        title: 'Dont be crazy',
-        msg: 'Exclusions are limited to 25 characters or less.',
-      })
-      setTimeout(() => {
-        onClose()
-      }, 3000)
-    } else if (!exclusions) {
-      if (wildcards1.length > 0 || numeric === null) {
-        r = await getWords(userInput)
-        setResults((state) => [...state, ...r])
-      } else if (numeric !== null) {
-        r = await getWords(numUserInput)
-        return filterStrings(userInput, r)
-      } else {
-        toast({
-          position: 'top',
-          duration: 2000,
-          isClosable: true,
-          status: 'error',
-          description: 'something weird happened...',
-        })
-      }
+    }
+    if (wildcards1.length > 0 || numeric === null) {
+      r = await getWords(userInput)
+      setResults((state) => [...state, ...r])
+    } else if (numeric !== null) {
+      r = await getWords(numUserInput)
+      return filterStrings(userInput, r)
     } else {
-      if (wildcards1.length > 0) {
-        r = await getWords(userInput)
-        return filterExclusions(r, wildcards1)
-      } else {
-        r = await getWords(numUserInput)
-        return filterExclusions(r, wildcards2)
-      }
+      toast({
+        position: 'top',
+        duration: 2000,
+        isClosable: true,
+        status: 'error',
+        description: 'something weird happened...',
+      })
     }
   }
 
@@ -211,7 +209,7 @@ const SearchForm = () => {
 
   return (
     <>
-      <Center h="100px">
+          <Center h="100px">
         <Heading>Word Search</Heading>
       </Center>
 
@@ -260,82 +258,37 @@ const SearchForm = () => {
         </AccordionItem>
       </Accordion>
       <Flex width="Full" align="center" justifyContent="center">
-        <Box w="90%" maxWidth="500px">
+        <Box w="90%" maxWidth="720px">
           <form onSubmit={handleSubmit}>
-            <Box my={4} textAlign="left">
-              <Tooltip label="Enter letters a-z, numbers 1-9, or ?" aria-label="A tooltip">
-              <FormControl isRequired>
-                <InputGroup>
-                  <InputLeftAddon
-                    children={
-                      <>
-                        <Text>Search </Text>
-                        <Text color="tomato">*</Text>
-                      </>
-                    }
-                  />
-                  <Input
-                    className="pin-input"
-                    type="text"
-                    placeholder="ba??"
-                    maxLength="30"
-                    value={userInput}
-                    onChange={({ target }) =>
-                      setUserInput(target.value.toLowerCase())
-                    }
-                  />
-                  {userInput.length > 0 ? (
-                    <InputRightElement
-                      children={
-                        <IconButton
-                          isRound
-                          aria-label="reset field"
-                          size="sm"
-                          icon={<CloseIcon onClick={resetInputField} />}
-                        />
-                      }
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </InputGroup>
-              </FormControl>
-              </Tooltip>
-              <Tooltip label="Enter any letters you do not want included in search results." aria-label="A tooltip" >
-              <FormControl mt={6}>
-                <InputGroup>
-                  <InputLeftAddon children="Exclude" />
-                  <Input
-                    className="pin-input"
-                    type="text"
-                    maxLength="25"
-                    value={exclusions}
-                    placeholder="xyz"
-                    onChange={({ target }) =>
-                      setExclusions(target.value.toLowerCase())
-                    }
-                  />
-                  {exclusions.length > 0 ? (
-                    <InputRightElement
-                      children={
-                        <IconButton
-                          isRound
-                          aria-label="reset field"
-                          size="sm"
-                          icon={<CloseIcon onClick={resetExclusionsField} />}
-                        />
-                      }
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </InputGroup>
-              </FormControl>
-              </Tooltip>
+            <Box borderWidth="1px" my={3} textAlign="left">
+              <Text>Search:</Text>
+              <PinInput
+                size="xs"
+                placeholder=""
+                value={userInput}
+                onChange={setUserInput}
+                type="alphanumeric"
+                variant="filled"
+              >
+                {fields}
+              </PinInput>
+            </Box>
+            <Box borderWidth="1px" my={3} textAlign="left">
+              <Text>Exclude:</Text>
+              <PinInput
+                size="xs"
+                placeholder=""
+                value={exclusions}
+                onChange={setExclusions}
+                type="alphanumeric"
+                variant="filled"
+              >
+                {fields}
+              </PinInput>
             </Box>
             <Box my={4} textAlign="left">
-              <ButtonGroup spacing="6">
-                <Button type="submit" onClick={handleSubmit}>
+              <ButtonGroup spacing="4">
+                <Button size="xs" type="submit" onClick={handleSubmit}>
                   Search
                 </Button>
                 <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -349,21 +302,24 @@ const SearchForm = () => {
 
                 {results.length > 0 ? (
                   <>
-                    <Button onClick={handleSort}>{buttonText}</Button>
+                    <Button size="xs" onClick={handleSort}>
+                      {buttonText}
+                    </Button>
                     <CopyToClipboard
                       className="CopyToClipboard"
                       text={copyResults()}
                       onCopy={handleCopy}
                     >
-                      <Button>{copiedButton} </Button>
+                      <Button size="xs">{copiedButton} </Button>
                     </CopyToClipboard>
-                    <Button onClick={resetForm}>Reset Form</Button>
+                    <Button size="xs" onClick={resetForm}>
+                      Reset Form
+                    </Button>
                   </>
                 ) : (
                   <></>
                 )}
               </ButtonGroup>
-
               <List
                 verticalAlign="middle"
                 value={results}

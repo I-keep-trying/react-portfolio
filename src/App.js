@@ -1,21 +1,39 @@
 import React from 'react'
-import { Switch } from 'react-router-dom'
-import Header from './components/Header'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
+import { Box } from '@chakra-ui/react'
+//import Header from './components/Header'
+import Header from './components/Header1'
+import Footer from './components/Footer'
 import './App.css'
-import paths from './config/paths'
-import MakeRoutes from './config/routes'
+import routes from './config/paths'
 
-const App = (props) => {
-  //console.log('props',props)
+const App = () => {
   return (
-    <div>
-      <Header />
-      <Switch>
-        {paths.map((path, index) => (
-          <MakeRoutes key={index} {...path} />
-        ))}
-      </Switch>
-    </div>
+    <>
+      <Router>
+        <Header />
+        {routes.map(({ path, Component }) => {
+          return (
+            <Route key={path} exact={path !== '*'} path={path}>
+              {({ match }) => (
+                <CSSTransition
+                  in={match != null}
+                  timeout={300}
+                  classNames="page"
+                  unmountOnExit
+                >
+                  <div className="page">
+                    <Component />
+                  </div>
+                </CSSTransition>
+              )}
+            </Route>
+          )
+        })}
+      </Router>
+      <Footer />
+    </>
   )
 }
 

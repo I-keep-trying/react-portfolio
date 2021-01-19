@@ -5,35 +5,32 @@ import Resume from '../pages/Resume'
 import WordSearch from '../pages/WordSearchForm'
 
 const paths = [
+
   {
     name: 'Homepage',
     path: '/',
-    exact: true,
-    component: Homepage,
+    Component: Homepage,
   },
   {
     name: 'Bio',
     path: '/bio',
-    exact: true,
-    component: Bio,
+    Component: Bio,
   },
-  {
-    name: 'Contact',
-    path: '/contact',
-    exact: true,
-    component: Contact,
-  },
+
   {
     name: 'Resume',
     path: '/resume',
-    exact: true,
-    component: Resume,
+    Component: Resume,
   },
   {
     name: 'WordSearch',
     path: '/wordsearch',
-    exact: true,
-    component: WordSearch,
+    Component: WordSearch,
+  },
+  {
+    name: 'Contact',
+    path: '/contact',
+    Component: Contact,
   },
 ]
 
