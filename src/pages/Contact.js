@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Heading,
@@ -30,14 +30,6 @@ import {
 } from '@chakra-ui/react'
 import { sendMail, customDomains } from '../services/email'
 import Isemail from 'isemail'
-import Email from 'react-email-autocomplete'
-
-/* 
-use-email-autocomplete
-https://codesandbox.io/s/useemailautocomplete-material-ui-j5m1x
-https://codesandbox.io/s/useemailautocomplete-material-ui-forked-5shs9?file=/src/index.js:312-716
-
-*/
 
 const Contact = () => {
   const [name, setName] = useState('')
