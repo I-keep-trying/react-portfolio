@@ -4,7 +4,6 @@ import { Icon } from '@chakra-ui/react'
 const Logo = (props) => {
   return (
     <Icon
-      id="logo"
       className="icon flag-icon1"
       width={62.854}
       height={62.854}

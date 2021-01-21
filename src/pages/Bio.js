@@ -61,7 +61,6 @@ const Bio = () => {
           nisl sagittis gravida. Mauris dictum quam vitae metus ornare maximus.
           Aliquam viverra bibendum nisl, a consectetur felis varius sed.
         </Text>
-        <Input size="xs" />
       </Box>
     </Center>
   )

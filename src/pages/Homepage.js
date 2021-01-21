@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from '../imgs/A-logo-gray2.svg'
 
 const Homepage = () => {
   return (
@@ -20,7 +19,6 @@ const Homepage = () => {
         >
         </a>
       </div>
-      <img src={logo} alt="logo" className="photo-small" />
     </div>
   )
 }

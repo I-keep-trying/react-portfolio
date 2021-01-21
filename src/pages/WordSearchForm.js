@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import {
   Accordion,
@@ -10,46 +9,36 @@ import {
   Heading,
   Center,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   InputGroup,
   InputLeftAddon,
   InputRightElement,
-  Textarea,
   Button,
   ButtonGroup,
   Flex,
   List,
   ListItem,
-  ListIcon,
   useToast,
-  Stack,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
   IconButton,
   Text,
-  Tooltip
+  Tooltip,
 } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
-
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
 import { stringDiff } from '../services/stringDiff'
-
 import { getWords } from '../services/dictionary'
 
 const SearchForm = () => {
   const [results, setResults] = useState([])
   const [userInput, setUserInput] = useState('')
-  const [inputState, setInputState] = useState({ value: '' })
   const [exclusions, setExclusions] = useState('')
   // eslint-disable-next-line no-unused-vars
   const [copied, setCopied] = useState(false)
@@ -57,7 +46,7 @@ const SearchForm = () => {
   const [buttonText, setButtonText] = useState('Sort a-z')
   const [copiedButton, setCopiedButton] = useState('Copy List')
   const [notify, setNotify] = useState({ title: '', msg: '' })
-  const toast = useToast()
+
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleSort = () => {
@@ -109,7 +98,7 @@ const SearchForm = () => {
       const newArr = stringDiff(arr1, obj.word)
 
       if (newArr.error) {
-        toast(`Error: ${newArr.error}; Param: ${obj.word}`)
+        setNotify({ msg: `Error: ${newArr.error}; Param: ${obj.word}` })
       } else if (newArr.results.length > 0) {
         setResults((state) => [...state, ...newArr.results])
       } else {
@@ -163,12 +152,8 @@ const SearchForm = () => {
         r = await getWords(numUserInput)
         return filterStrings(userInput, r)
       } else {
-        toast({
-          position: 'top',
-          duration: 2000,
-          isClosable: true,
-          status: 'error',
-          description: 'something weird happened...',
+        setNotify({
+          msg: 'something weird happened...',
         })
       }
     } else {
@@ -215,129 +200,135 @@ const SearchForm = () => {
         <Heading>Word Search</Heading>
       </Center>
 
-      <Accordion defaultIndex={[0]} allowMultiple>
-        <AccordionItem>
-          <AccordionButton>
-            <AccordionIcon />
-            <Box flex="1" textAlign="left">
-              Use one ? for each individual unknown letter.
-            </Box>
-          </AccordionButton>
-          <AccordionPanel pb={4}>
-            Example: b?ar might return bear, or boar.
-          </AccordionPanel>
-        </AccordionItem>
-
-        <AccordionItem>
-          <AccordionButton>
-            <AccordionIcon />
-            <Box flex="1" textAlign="left">
-              Use numeric digits 1 - 9 for two or more of the same letter.
-            </Box>
-          </AccordionButton>
-          <AccordionPanel pb={4}>
-            For example, if a word has more than one set of repeating letters,
-            you can use different numbers for different sets of letters. For
-            example, 'balloon' could be 'ba1122n', or 'excellence' could be:
-            1xc1221nc1.
-          </AccordionPanel>
-        </AccordionItem>
-
-        <AccordionItem>
-          <AccordionButton>
-            <AccordionIcon />
-            <Box flex="1" textAlign="left">
-              (Optional) Exclude or filter specific letters from results.
-            </Box>
-          </AccordionButton>
-          <AccordionPanel pb={4}>
-            Any letters entered into the 'exclusions' filter will eliminate any
-            results containing the excluded letter(s) in the wildcard "?"
-            position(s). The provided known letters are ignored, i.e., if your
-            query is 'ba?y', and you exclude the letter 'b', the word 'baby'
-            will NOT be included in the returned list.
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
       <Flex width="Full" align="center" justifyContent="center">
         <Box w="90%" maxWidth="500px">
+          <Accordion defaultIndex={[0]} allowMultiple>
+            <AccordionItem>
+              <AccordionButton>
+                <AccordionIcon />
+                <Box flex="1" textAlign="left">
+                  Use one ? for each individual unknown letter.
+                </Box>
+              </AccordionButton>
+              <AccordionPanel pb={4}>
+                Example: b?ar might return bear, or boar.
+              </AccordionPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+              <AccordionButton>
+                <AccordionIcon />
+                <Box flex="1" textAlign="left">
+                  Use numeric digits 1 - 9 for two or more of the same letter.
+                </Box>
+              </AccordionButton>
+              <AccordionPanel pb={4}>
+                For example, if a word has more than one set of repeating
+                letters, you can use different numbers for different sets of
+                letters. For example, 'balloon' could be 'ba1122n', or
+                'excellence' could be: 1xc1221nc1.
+              </AccordionPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+              <AccordionButton>
+                <AccordionIcon />
+                <Box flex="1" textAlign="left">
+                  (Optional) Exclude or filter specific letters from results.
+                </Box>
+              </AccordionButton>
+              <AccordionPanel pb={4}>
+                Any letters entered into the 'exclusions' filter will eliminate
+                any results containing the excluded letter(s) in the wildcard
+                "?" position(s). The provided known letters are ignored, i.e.,
+                if your query is 'ba?y', and you exclude the letter 'b', the
+                word 'baby' will NOT be included in the returned list.
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+
           <form onSubmit={handleSubmit}>
             <Box my={4} textAlign="left">
-              <Tooltip label="Enter letters a-z, numbers 1-9, or ?" aria-label="A tooltip">
-              <FormControl isRequired>
-                <InputGroup>
-                  <InputLeftAddon
-                    children={
-                      <>
-                        <Text>Search </Text>
-                        <Text color="tomato">*</Text>
-                      </>
-                    }
-                  />
-                  <Input
-                    className="pin-input"
-                    type="text"
-                    placeholder="ba??"
-                    maxLength="30"
-                    value={userInput}
-                    onChange={({ target }) =>
-                      setUserInput(target.value.toLowerCase())
-                    }
-                  />
-                  {userInput.length > 0 ? (
-                    <InputRightElement
+              <Tooltip
+                label="Enter letters a-z, numbers 1-9, or ?"
+                aria-label="Enter letters a-z, numbers 1-9, or ?"
+              >
+                <FormControl isRequired>
+                  <InputGroup>
+                    <InputLeftAddon
                       children={
-                        <IconButton
-                          isRound
-                          aria-label="reset field"
-                          size="sm"
-                          icon={<CloseIcon onClick={resetInputField} />}
-                        />
+                        <>
+                          <Text>Search </Text>
+                          <Text color="tomato">*</Text>
+                        </>
                       }
                     />
-                  ) : (
-                    <></>
-                  )}
-                </InputGroup>
-              </FormControl>
+                    <Input
+                      className="pin-input"
+                      type="text"
+                      placeholder="ba??"
+                      maxLength="30"
+                      value={userInput}
+                      onChange={(e) => {
+                        console.log('e.key', e.nativeEvent.keyCode)
+                        return setUserInput(e.target.value.toLowerCase())
+                      }}
+                    />
+                    {userInput.length > 0 ? (
+                      <InputRightElement
+                        children={
+                          <IconButton
+                            isRound
+                            aria-label="reset field"
+                            size="sm"
+                            icon={<CloseIcon onClick={resetInputField} />}
+                          />
+                        }
+                      />
+                    ) : (
+                      <></>
+                    )}
+                  </InputGroup>
+                </FormControl>
               </Tooltip>
-              <Tooltip label="Enter any letters you do not want included in search results." aria-label="A tooltip" >
-              <FormControl mt={6}>
-                <InputGroup>
-                  <InputLeftAddon children="Exclude" />
-                  <Input
-                    className="pin-input"
-                    type="text"
-                    maxLength="25"
-                    value={exclusions}
-                    placeholder="xyz"
-                    onChange={({ target }) =>
-                      setExclusions(target.value.toLowerCase())
-                    }
-                  />
-                  {exclusions.length > 0 ? (
-                    <InputRightElement
-                      children={
-                        <IconButton
-                          isRound
-                          aria-label="reset field"
-                          size="sm"
-                          icon={<CloseIcon onClick={resetExclusionsField} />}
-                        />
+              <Tooltip
+                label="Enter any letters you do not want included in search results."
+                aria-label="Enter any letters you do not want included in search results."
+              >
+                <FormControl mt={6}>
+                  <InputGroup>
+                    <InputLeftAddon children="Exclude" />
+                    <Input
+                      className="pin-input"
+                      type="text"
+                      maxLength="25"
+                      value={exclusions}
+                      placeholder="xyz"
+                      onChange={({ target }) =>
+                        setExclusions(target.value.toLowerCase())
                       }
                     />
-                  ) : (
-                    <></>
-                  )}
-                </InputGroup>
-              </FormControl>
+                    {exclusions.length > 0 ? (
+                      <InputRightElement
+                        children={
+                          <IconButton
+                            isRound
+                            aria-label="reset field"
+                            size="sm"
+                            icon={<CloseIcon onClick={resetExclusionsField} />}
+                          />
+                        }
+                      />
+                    ) : (
+                      <></>
+                    )}
+                  </InputGroup>
+                </FormControl>
               </Tooltip>
             </Box>
             <Box my={4} textAlign="left">
               <ButtonGroup spacing="6">
-                <Button type="submit" onClick={handleSubmit}>
-                  Search
-                </Button>
+                <Button type="submit">Search</Button>
                 <Modal isOpen={isOpen} onClose={onClose} isCentered>
                   <ModalOverlay />
                   <ModalContent>

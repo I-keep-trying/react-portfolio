@@ -1,13 +1,9 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useRef } from 'react'
 import {
   Box,
   Heading,
   Center,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   InputGroup,
   InputLeftAddon,
@@ -15,17 +11,11 @@ import {
   Button,
   ButtonGroup,
   Flex,
-  List,
-  ListItem,
-  ListIcon,
-  useToast,
-  Stack,
   Spacer,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
@@ -35,17 +25,19 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
-  PopoverCloseButton,
-  Portal,
 } from '@chakra-ui/react'
-//import { useForm } from 'react-hook-form'
 import { sendMail, customDomains } from '../services/email'
 import Isemail from 'isemail'
 import Email from 'react-email-autocomplete'
+
+/* 
+use-email-autocomplete
+https://codesandbox.io/s/useemailautocomplete-material-ui-j5m1x
+https://codesandbox.io/s/useemailautocomplete-material-ui-forked-5shs9?file=/src/index.js:312-716
+
+*/
 
 const Contact = () => {
   const [name, setName] = useState('')
@@ -133,7 +125,6 @@ const Contact = () => {
               <InputGroup mt={6}>
                 <InputLeftAddon children="Email" />
                 <Input
-                  control={Email}
                   onChange={onEmailInputChange}
                   type="text"
                   placeholder="you@yourmail.com"
@@ -144,7 +135,9 @@ const Contact = () => {
                   isInvalid={!valid}
                 />
               </InputGroup>
-
+              <Center>
+                <Text mb="8px">Your email will never be shared or sold. </Text>
+              </Center>
               <FormControl mt={6}>
                 <Text mb="8px">Message:</Text>
                 <Textarea
