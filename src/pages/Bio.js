@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Text, Box, Center, Input } from '@chakra-ui/react'
+import { Text, Box, Center,extendTheme } from '@chakra-ui/react'
 
 const Bio = () => {
   let history = useHistory()
@@ -12,6 +12,7 @@ const Bio = () => {
   return (
     <Center>
       <Box w="80%">
+        <Text>Almost before we knew it, we had left the ground.</Text>
         <Text>
           If I had anything to say for myself, this is where I would put it.
         </Text>

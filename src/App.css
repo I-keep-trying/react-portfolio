@@ -4,7 +4,7 @@
 
 .page {
   position: absolute;
-  margin-top: 1em;
+  margin-top: 11em;
   height: 5rem;
   width: 100%;
 }
@@ -90,6 +90,7 @@
 .active {
   color: currentColor !important;
   filter: drop-shadow(0 0 3px currentColor) !important;
+  border-bottom: 2px solid currentColor;
 }
 
 .wrapper {
@@ -100,26 +101,29 @@
   left: 50%;
 }
 
-.container {
+/* .container {
   width: 100%;
   height: 100%;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 30px;
 }
-
-.item {
+ */
+/* .item {
   width: inherit;
   height: inherit;
   background: white;
   transform-origin: 50% 100%;
-}
+} */
 /* https://testing.2x2p.com/header/ */
-/* #header-wrap {
+.menu {
+  z-index: 0 !important;
+}
+#header-wrap {
   position: fixed;
   min-height: 80px;
   transition: top 666ms;
-} */
+}
 #header-content {
   margin: 0;
   min-height: 75px;

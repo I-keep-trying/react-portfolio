@@ -1,25 +1,49 @@
-import React from 'react'
+import {
+  Box,
+  Heading,
+  Image,
+  VStack,
+  Text,
+  Link,
+  useColorModeValue,
+} from '@chakra-ui/react'
+import words from '../imgs/crypto.png'
+import routes from '../config/paths'
 
 const Homepage = () => {
+  console.log('routes', routes[3])
   return (
-    <div className="white-container-home">
-      <h1 className="name">Andrea Crego</h1>
-      <h2 className="subheader">Web App Developer</h2>
-      <div className="home-icons">
-        <a
-          href="https://github.com/I-keep-trying"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
-        <a
-          href="https://twitter.com/Andrea_Crego"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
-      </div>
-    </div>
+    <>
+      <article>
+        <Link href="/wordsearch">
+          <VStack
+            maxW="xs"
+            align="center"
+            shadow="lg"
+            rounded="lg"
+            overflow="hidden"
+            mx="auto"
+          >
+            <Image
+              h={56}
+              w="full"
+              objectFit="cover"
+              objectPosition="center"
+              rounded="lg"
+              shadow="lg"
+              src={words}
+              alt="avatar"
+            />
+            <Box align="center" p={4}>
+              <Heading as="h3" size="md">
+                Word Search
+              </Heading>
+              <Text fontSize="sm">For cryptogram and crossword puzzles.</Text>
+            </Box>
+          </VStack>
+        </Link>
+      </article>
+    </>
   )
 }
 
