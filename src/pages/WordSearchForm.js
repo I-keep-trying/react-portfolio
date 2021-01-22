@@ -28,12 +28,16 @@ import {
   IconButton,
   Text,
   Tooltip,
+  HStack,
 } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
 import { stringDiff } from '../services/stringDiff'
 import { getWords } from '../services/dictionary'
+import Footer from '../components/Footer'
+import ReactLogo from './../imgs/ReactSvgCli'
+import ChakraLogo from './../imgs/ChakraSvgCli'
 
 const SearchForm = () => {
   const [results, setResults] = useState([])
@@ -200,7 +204,7 @@ const SearchForm = () => {
       </Center>
 
       <Flex width="Full" align="center" justifyContent="center">
-        <Box w="90%" maxWidth="500px">
+        <Box  w="90%" maxWidth="500px">
           <Accordion defaultIndex={[0]} allowMultiple>
             <AccordionItem>
               <AccordionButton>
@@ -366,6 +370,39 @@ const SearchForm = () => {
             </Box>
           </form>
         </Box>
+      </Flex>
+      <Flex align="center" justify="center" minH="5vh" mt="1em">
+        <HStack spacing="24px">
+          <Box>
+            <Text fontSize="xs">Proudly made with React and Chakra</Text>
+          </Box>
+        </HStack>
+      </Flex>
+      <Flex align="center" justify="center" minH="15vh">
+        <HStack spacing="24px">
+          <Box>
+            <Text
+              as="a"
+              href="https://reactjs.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              fontSize="6xl"
+            >
+              <ReactLogo />
+            </Text>
+          </Box>
+          <Box>
+            <Text
+              as="a"
+              href="https://chakra-ui.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              fontSize="4xl"
+            >
+              <ChakraLogo />
+            </Text>
+          </Box>
+        </HStack>
       </Flex>
     </>
   )

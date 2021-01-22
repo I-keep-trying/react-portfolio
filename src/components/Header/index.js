@@ -17,6 +17,7 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Skeleton,
 } from '@chakra-ui/react'
 import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { NavLink } from 'react-router-dom'
@@ -120,6 +121,7 @@ export const Navbar = () => {
         <HStack spacing={4}>
           <ThemeToggle />
         </HStack>
+        <Skeleton startColor="pink.500" endColor="orange.500" height="20px" />
       </Flex>
     </>
   )
