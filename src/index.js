@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { Fonts } from './Fonts/Fonts'
 import App from './App'
 //import './index.css'
@@ -18,9 +18,9 @@ console.log('theme', theme)
 ReactDOM.render(
   <ChakraProvider theme={theme}>
     <Fonts />
-    <BrowserRouter>
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </ChakraProvider>,
   document.getElementById('root')
 )
