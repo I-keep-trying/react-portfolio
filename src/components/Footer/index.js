@@ -18,6 +18,7 @@ function Footer() {
     <>
       <footer>
         <Flex
+          id="footer-wrap"
           direction={['column', 'column', 'row']}
           w="full"
           px={6}

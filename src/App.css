@@ -1,5 +1,6 @@
 .container {
   position: relative;
+  margin-bottom: 10em;
 }
 
 .page {
@@ -116,9 +117,6 @@
   transform-origin: 50% 100%;
 } */
 /* https://testing.2x2p.com/header/ */
-.menu {
-  z-index: 0 !important;
-}
 #header-wrap {
   position: fixed;
   min-height: 80px;
@@ -147,8 +145,7 @@
 
 #footer-wrap {
   position: fixed;
-  margin: 0;
-  right: 0;
-  min-height: 80px;
-  z-index: 0 !important;
+  bottom: 0;
+  width: 100%;
+  min-height: 75px;
 }
