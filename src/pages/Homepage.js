@@ -15,7 +15,7 @@ const Homepage = () => {
   return (
     <>
       <article>
-        <Link href="/wordsearch">
+        <Link href="https://affectionate-austin-e78d61.netlify.app/wordsearch">
           <VStack
             maxW="xs"
             align="center"
