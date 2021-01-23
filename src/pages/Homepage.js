@@ -7,6 +7,7 @@ import {
   Link,
   Flex,
   HStack,
+  Center,
   useColorModeValue,
 } from '@chakra-ui/react'
 import words from '../imgs/crypto.png'
@@ -16,6 +17,9 @@ import ChakraLogo from './../imgs/ChakraSvgCli'
 const Homepage = () => {
   return (
     <>
+          <Center h="100px">
+        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">Apps</Heading>
+      </Center>
       <article>
         <Link href="https://affectionate-austin-e78d61.netlify.app/wordsearch">
           <VStack

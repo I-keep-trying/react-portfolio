@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Accordion,
   AccordionItem,
@@ -52,6 +52,13 @@ const SearchForm = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  /*   const handleKeyDown = (event) => {
+    console.log('A key was pressed', event.keyCode)
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+  }) */
   const handleSort = () => {
     const newResults = [...results]
     const sort1 = results.sort((a, b) => (a.word < b.word ? 1 : -1))
@@ -111,6 +118,7 @@ const SearchForm = () => {
   }
 
   const handleSubmit = async (e) => {
+    console.log('submit e', e)
     e.preventDefault()
     setResults([])
     let wildcards1 = [...userInput.matchAll(/\?/g)]
@@ -200,11 +208,13 @@ const SearchForm = () => {
   return (
     <>
       <Center h="100px">
-        <Heading>Word Search</Heading>
+        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">
+          Word Search
+        </Heading>
       </Center>
 
       <Flex width="Full" align="center" justifyContent="center">
-        <Box  w="90%" maxWidth="500px">
+        <Box w="90%" maxWidth="500px">
           <Accordion defaultIndex={[0]} allowMultiple>
             <AccordionItem>
               <AccordionButton>
@@ -267,13 +277,14 @@ const SearchForm = () => {
                       }
                     />
                     <Input
+                      id="userinput"
                       className="pin-input"
                       type="text"
                       placeholder="ba??"
                       maxLength="30"
                       value={userInput}
                       onChange={(e) => {
-                        console.log('e.key', e.nativeEvent.keyCode)
+                        console.log('e.key', e)
                         return setUserInput(e.target.value.toLowerCase())
                       }}
                     />

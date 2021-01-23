@@ -1,16 +1,14 @@
 import React from 'react'
-import {
-  Center,
-  Flex,
-  Button,
-  Container,
-} from '@chakra-ui/react'
+import { Center, Flex, Button, Container, Heading } from '@chakra-ui/react'
 
 import Footer from '../components/Footer'
 
 const Resume = () => {
   return (
     <>
+      <Center h="100px">
+        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">Resume</Heading>
+      </Center>
       <Center>
         <Button
           size="large"
@@ -24,7 +22,14 @@ const Resume = () => {
       </Center>
 
       <Container>
-        <Flex width="100%" align="center" justify="center" mt="2em">
+        <Flex
+          height="50%"
+          width="100%"
+          align="center"
+          justify="center"
+          mt="2em"
+          mb="12em"
+        >
           <iframe
             src="https://docs.google.com/document/d/11g4Rjr6Pguz2MVFf81_A8X4rokyZMo2PGLpFBlNo-tM/preview"
             title="Andrea Crego Resume"

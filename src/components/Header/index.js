@@ -83,6 +83,7 @@ export const Navbar = () => {
             placement="right"
             onClose={onClose}
             finalFocusRef={btnRef}
+            size="xs"
           >
             <DrawerOverlay>
               <DrawerContent>
@@ -90,7 +91,13 @@ export const Navbar = () => {
                 <DrawerBody>
                   <VStack align="center">
                     {routes.map((route) => (
-                      <Link as={NavLink} key={route.path} to={route.path} exact>
+                      <Link
+                        id="header-item"
+                        as={NavLink}
+                        key={route.path}
+                        to={route.path}
+                        exact
+                      >
                         {route.name}
                       </Link>
                     ))}
@@ -108,6 +115,7 @@ export const Navbar = () => {
         >
           {routes.map((route) => (
             <Link
+              id="header-item"
               as={NavLink}
               key={route.path}
               to={route.path}
@@ -118,11 +126,12 @@ export const Navbar = () => {
             </Link>
           ))}
         </HStack>
+
         <HStack spacing={4}>
           <ThemeToggle />
         </HStack>
-        <Skeleton startColor="pink.500" endColor="orange.500" height="20px" />
       </Flex>
+      <Skeleton startColor="pink.500" endColor="orange.500" height="6px" />
     </>
   )
 }

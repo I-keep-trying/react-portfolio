@@ -98,7 +98,7 @@ const Contact = () => {
   return (
     <>
       <Center h="100px">
-        <Heading>Contact Me</Heading>
+        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">Contact Me</Heading>
       </Center>
       <Flex width="Full" align="center" justifyContent="center">
         <Box w="90%" maxWidth="500px">

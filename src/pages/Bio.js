@@ -1,6 +1,14 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Text, Box, Center, Flex, HStack, extendTheme } from '@chakra-ui/react'
+import {
+  Text,
+  Heading,
+  Box,
+  Center,
+  Flex,
+  HStack,
+  extendTheme,
+} from '@chakra-ui/react'
 import ReactLogo from './../imgs/ReactSvgCli'
 import ChakraLogo from './../imgs/ChakraSvgCli'
 
@@ -13,11 +21,31 @@ const Bio = () => {
 
   return (
     <>
+      <Center h="100px">
+        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">
+          About Me
+        </Heading>
+      </Center>
       <Center>
         <Box w="80%">
           <Text>Almost before we knew it, we had left the ground.</Text>
           <Text>
-            If I had anything to say for myself, this is where I would put it.
+            I know the pieces fit cuz I watched them fall away Mildewed and
+            smoldering. Fundamental differing. Pure intention juxtaposed will
+            set two lovers souls in motion Disintegrating as it goes testing our
+            communication The light that fueled our fire then has burned a hole
+            between us so We cannot see to reach an end crippling our
+            communication. I know the pieces fit cuz I watched them tumble down
+            No fault, none to blame it doesn't mean I don't desire to Point the
+            finger, blame the other, watch the temple topple over. To bring the
+            pieces back together, rediscover communication The poetry that comes
+            from the squaring off between, And the circling is worth it. Finding
+            beauty in the dissonance. There was a time that the pieces fit, but
+            I watched them fall away. Mildewed and smoldering, strangled by our
+            coveting I've done the math enough to know the dangers of our second
+            guessing Doomed to crumble unless we grow, and strengthen our
+            communication. Cold silence has a tendency to atrophy any Sense of
+            compassion Between supposed lovers/brothers
           </Text>
           <Text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
@@ -88,7 +116,7 @@ const Bio = () => {
               <ReactLogo />
             </Text>
           </Box>
-          <Box >
+          <Box>
             <Text
               as="a"
               href="https://chakra-ui.com/"
