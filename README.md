@@ -1,38 +1,15 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) version 16.13.1.
+<p>
+<a href="https://github.com/facebook/create-react-app">
+<img alt="Logo" align="right" src="https://create-react-app.dev/img/logo.svg" width="20%" /></a></p>
 
-Easier to clone a boilerplate than doing npx etc...
+<p align="center">
+  <a href="https://github.com/chakra-ui/chakra-ui">
+    <img src="https://github.com/chakra-ui/chakra-ui/blob/master/logo/logo-colored@2x.png?raw=true" alt="Chakra logo" width="300" />
+  </a>
+</p>
+<h1 align="center">Build Accessible React Apps with Speed ⚡️</h1>
+<br />
 
-commmonmark markdown syntax reference:
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7f1e1e37-40eb-4bde-b092-5a79ed202c38/deploy-status)](https://app.netlify.com/sites/affectionate-austin-e78d61/deploys)
 
-_Italic_
-
-**Bold**
-
-# Heading 1
-
-## Heading 2
-
-[Link](http://a.com)
-![Image](http://url/a.png)
-
-> Blockquote
-
-- List
-- List
-- List
-
-1. One
-2. Two
-3. Three
-
-Horizontal Rule
-
----
-
-`Inline code` with backticks
-
-```
-# code block
-print '3 backticks or'
-print 'indent 4 spaces'
-```
+[Demo](https://affectionate-austin-e78d61.netlify.app/#/)
