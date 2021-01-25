@@ -52,13 +52,13 @@ const SearchForm = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  /*   const handleKeyDown = (event) => {
+    const handleKeyDown = (event) => {
     console.log('A key was pressed', event.keyCode)
   }
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
-  }) */
+  })
   const handleSort = () => {
     const newResults = [...results]
     const sort1 = results.sort((a, b) => (a.word < b.word ? 1 : -1))
