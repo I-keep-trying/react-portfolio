@@ -4,12 +4,13 @@ import {
   Image,
   VStack,
   Text,
-  Link,
+  //  Link,
   Flex,
   HStack,
   Center,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 import words from '../imgs/crypto.png'
 import ReactLogo from './../imgs/ReactSvgCli'
 import ChakraLogo from './../imgs/ChakraSvgCli'
@@ -17,38 +18,13 @@ import ChakraLogo from './../imgs/ChakraSvgCli'
 const Homepage = () => {
   return (
     <>
-          <Center h="100px">
-        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">Apps</Heading>
+      <Center h="100px">
+        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">
+          Apps
+        </Heading>
       </Center>
       <article>
-        <Link href="https://affectionate-austin-e78d61.netlify.app/wordsearch">
-          <VStack
-            maxW="xs"
-            align="center"
-            shadow="lg"
-            rounded="lg"
-            overflow="hidden"
-            mx="auto"
-          >
-            <Image
-              h={56}
-              w="full"
-              objectFit="cover"
-              objectPosition="center"
-              rounded="lg"
-              shadow="lg"
-              src={words}
-              alt="avatar"
-            />
-            <Box align="center" p={4}>
-              <Heading as="h3" size="md">
-                Word Search
-              </Heading>
-              <Text fontSize="sm">For cryptogram and crossword puzzles.</Text>
-            </Box>
-          </VStack>
-        </Link>
-        <Link href="/wordsearch">
+        <Link to="/wordsearch">
           <VStack
             maxW="xs"
             align="center"
