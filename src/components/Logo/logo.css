@@ -1,0 +1,24 @@
+path#grad1 {
+  transition: 0.5s;
+}
+
+svg {
+  width: 80px;
+  max-height: 80px;
+}
+
+svg .gradient1 {
+  fill: currentColor;
+}
+svg .gradient2 {
+  fill: url('#grad2');
+}
+
+svg use {
+  transition: 0.5s;
+  opacity: 0;
+}
+
+svg:hover use {
+  opacity: 1;
+}

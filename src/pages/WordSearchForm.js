@@ -35,9 +35,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
 import { stringDiff } from '../services/stringDiff'
 import { getWords } from '../services/dictionary'
-import Footer from '../components/Footer'
-import ReactLogo from './../imgs/ReactSvgCli'
-import ChakraLogo from './../imgs/ChakraSvgCli'
 
 const SearchForm = () => {
   const [results, setResults] = useState([])
@@ -52,13 +49,19 @@ const SearchForm = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-    const handleKeyDown = (event) => {
-    console.log('A key was pressed', event.keyCode)
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      handleSubmit(event)
+    }
   }
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   })
+
   const handleSort = () => {
     const newResults = [...results]
     const sort1 = results.sort((a, b) => (a.word < b.word ? 1 : -1))
@@ -116,9 +119,30 @@ const SearchForm = () => {
       }
     })
   }
+  console.log('userInput', userInput)
 
   const handleSubmit = async (e) => {
     console.log('submit e', e)
+    /* without event listener:
+    SyntheticBaseEvent {
+    bubbles: true
+    cancelable: true
+    currentTarget: null
+    defaultPrevented: true
+    eventPhase: 3
+    isDefaultPrevented: ƒ functionThatReturnsTrue()
+    isPropagationStopped: ƒ functionThatReturnsFalse()
+    isTrusted: true
+    nativeEvent: SubmitEvent {
+      isTrusted: true, submitter: button.chakra-button.css-1w5m1dh, 
+      type: "submit", target: form, currentTarget: null, …}
+    target: form
+    timeStamp: 14703.689999994822
+    type: "submit"
+    _reactName: "onSubmit"
+    _targetInst: null
+}
+    */
     e.preventDefault()
     setResults([])
     let wildcards1 = [...userInput.matchAll(/\?/g)]
@@ -214,8 +238,8 @@ const SearchForm = () => {
       </Center>
 
       <Flex width="Full" align="center" justifyContent="center">
-        <Box w="90%" maxWidth="500px">
-          <Accordion defaultIndex={[0]} allowMultiple>
+        <Box textAlign="left" w="90%" maxWidth="500px">
+          <Accordion allowMultiple>
             <AccordionItem>
               <AccordionButton>
                 <AccordionIcon />
@@ -278,7 +302,7 @@ const SearchForm = () => {
                     />
                     <Input
                       id="userinput"
-                      className="pin-input"
+                      className="search-input"
                       type="text"
                       placeholder="ba??"
                       maxLength="30"
@@ -295,7 +319,8 @@ const SearchForm = () => {
                             isRound
                             aria-label="reset field"
                             size="sm"
-                            icon={<CloseIcon onClick={resetInputField} />}
+                            icon={<CloseIcon />}
+                            onClick={resetInputField}
                           />
                         }
                       />
@@ -313,7 +338,7 @@ const SearchForm = () => {
                   <InputGroup>
                     <InputLeftAddon children="Exclude" />
                     <Input
-                      className="pin-input"
+                      className="search-input"
                       type="text"
                       maxLength="25"
                       value={exclusions}
@@ -329,7 +354,8 @@ const SearchForm = () => {
                             isRound
                             aria-label="reset field"
                             size="sm"
-                            icon={<CloseIcon onClick={resetExclusionsField} />}
+                            icon={<CloseIcon />}
+                            onClick={resetExclusionsField}
                           />
                         }
                       />
@@ -340,9 +366,11 @@ const SearchForm = () => {
                 </FormControl>
               </Tooltip>
             </Box>
-            <Box my={4} textAlign="left">
-              <ButtonGroup spacing="6">
-                <Button type="submit">Search</Button>
+            <Box my={8} textAlign="left">
+              <ButtonGroup spacing="2">
+                <Button size="sm" type="submit">
+                  Search
+                </Button>
                 <Modal isOpen={isOpen} onClose={onClose} isCentered>
                   <ModalOverlay />
                   <ModalContent>
@@ -354,15 +382,19 @@ const SearchForm = () => {
 
                 {results.length > 0 ? (
                   <>
-                    <Button onClick={handleSort}>{buttonText}</Button>
+                    <Button size="sm" onClick={handleSort}>
+                      {buttonText}
+                    </Button>
                     <CopyToClipboard
                       className="CopyToClipboard"
                       text={copyResults()}
                       onCopy={handleCopy}
                     >
-                      <Button>{copiedButton} </Button>
+                      <Button size="sm">{copiedButton} </Button>
                     </CopyToClipboard>
-                    <Button onClick={resetForm}>Reset Form</Button>
+                    <Button size="sm" onClick={resetForm}>
+                      Reset Form
+                    </Button>
                   </>
                 ) : (
                   <></>
@@ -381,39 +413,6 @@ const SearchForm = () => {
             </Box>
           </form>
         </Box>
-      </Flex>
-      <Flex align="center" justify="center" minH="5vh" mt="1em">
-        <HStack spacing="24px">
-          <Box>
-            <Text fontSize="xs">Proudly made with React and Chakra</Text>
-          </Box>
-        </HStack>
-      </Flex>
-      <Flex align="center" justify="center" minH="15vh">
-        <HStack spacing="24px">
-          <Box>
-            <Text
-              as="a"
-              href="https://reactjs.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              fontSize="6xl"
-            >
-              <ReactLogo />
-            </Text>
-          </Box>
-          <Box>
-            <Text
-              as="a"
-              href="https://chakra-ui.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              fontSize="4xl"
-            >
-              <ChakraLogo />
-            </Text>
-          </Box>
-        </HStack>
       </Flex>
     </>
   )

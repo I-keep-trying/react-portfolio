@@ -1,13 +1,14 @@
-.container {
+/* .container {
   position: relative;
   margin-bottom: 10em;
-}
+} */
 
 .page {
   position: absolute;
-  margin-top: 11em;
-  height: 5rem;
+  top: 7em;
   width: 100%;
+  padding-bottom: 8em;
+  z-index: 0 !important;
 }
 
 .page-enter {
@@ -32,44 +33,15 @@
   transition: opacity 300ms, transform 300ms;
 }
 
-.flag-icon1 {
+.icon1 {
   color: currentColor !important;
 }
 
-.flag-icon1:hover {
+.icon1:hover {
   filter: drop-shadow(0 0 2px currentColor) !important;
 }
 
-.input {
-  border-radius: 0 !important;
-  font-size: 1em !important;
-  padding: 0 20% !important;
-  height: 2rem !important;
-  width: 2rem !important;
-  margin: 0;
-}
-
-.word-input {
-  width: 100%;
-  outline: 0;
-  position: relative;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-  font-size: 5em;
-  /* padding-left: 0.75rem; */
-  /* padding-right: 0.75rem; */
-  height: 2rem;
-  border-radius: 0.125rem;
-  border: 2px solid;
-  border-color: transparent;
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.pin-input {
+.search-input {
   width: 1.5rem;
   outline: 0;
   position: relative;
@@ -90,71 +62,69 @@
 
 .active {
   color: currentColor !important;
-  filter: drop-shadow(0 0 3px currentColor) !important;
   border-bottom: 2px solid currentColor;
 }
 
-.wrapper {
-  width: 150px;
-  height: 150px;
-  position: fixed;
-  top: 100%;
-  left: 50%;
+.active:hover {
+  border-bottom: 0px solid currentColor;
 }
 
-/* .container {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 30px;
+.header2 {
+  border: 2px solid blueviolet !important;
 }
- */
-/* .item {
-  width: inherit;
-  height: inherit;
-  background: white;
-  transform-origin: 50% 100%;
-} */
+
+.main {
+  border: 2px solid greenyellow !important;
+}
+
+.item {
+  border: 3px solid green !important;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
 /* https://testing.2x2p.com/header/ */
 #header-wrap {
+  z-index: 1;
   position: fixed;
-  min-height: 80px;
   transition: top 666ms;
 }
 
 #header-item:hover {
-  background: -webkit-linear-gradient(#ff0080, rgb(255, 94, 0));
+  background: -webkit-linear-gradient(45deg, #ff0080, rgb(255, 94, 0));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-decoration: none;
+  font-weight: bold;
 }
-#header-content {
+/* #header-content {
   margin: 0;
   min-height: 75px;
   box-sizing: border-box;
-}
-#header-progress {
+} */
+/* #header-progress {
   padding: 0px;
   box-sizing: border-box;
   height: 5px;
   width: 0%;
   overflow: hidden;
   transition: width 333ms linear;
-}
-#page-content {
+} */
+/* #page-content {
   margin-top: 80px;
   padding: 5px;
   box-sizing: border-box;
   width: 100%;
   overflow: scroll;
-}
+} */
 
 #footer-wrap {
   position: fixed;
   bottom: 0;
   width: 100%;
-  padding-top: 15em;
-  margin-top: 80em;
+  padding-bottom: 0.2em;
 }

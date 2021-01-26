@@ -1,13 +1,14 @@
 import React from 'react'
 import { Center, Flex, Button, Container, Heading } from '@chakra-ui/react'
-
-import Footer from '../components/Footer'
+import GithubIcon from '../components/Logo/GithubIcon'
 
 const Resume = () => {
   return (
     <>
       <Center h="100px">
-        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">Resume</Heading>
+        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">
+          Resume
+        </Heading>
       </Center>
       <Center>
         <Button
@@ -20,8 +21,20 @@ const Resume = () => {
           View Resume
         </Button>
       </Center>
-
       <Container>
+        <Flex
+          height="100%"
+          width="100%"
+          align="center"
+          justify="center"
+          mt="2em"
+          mb="2em"
+        >
+          <GithubIcon />
+        </Flex>
+      </Container>
+
+     {/*  <Container>
         <Flex
           height="50%"
           width="100%"
@@ -38,8 +51,7 @@ const Resume = () => {
             loading="lazy"
           />
         </Flex>
-      </Container>
-      <Footer />
+      </Container> */}
     </>
   )
 }

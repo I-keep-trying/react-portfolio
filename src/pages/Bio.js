@@ -5,12 +5,7 @@ import {
   Heading,
   Box,
   Center,
-  Flex,
-  HStack,
-  extendTheme,
 } from '@chakra-ui/react'
-import ReactLogo from './../imgs/ReactSvgCli'
-import ChakraLogo from './../imgs/ChakraSvgCli'
 
 const Bio = () => {
   let history = useHistory()
@@ -27,7 +22,7 @@ const Bio = () => {
         </Heading>
       </Center>
       <Center>
-        <Box w="80%">
+        <Box align="left" w="80%">
           <Text>Almost before we knew it, we had left the ground.</Text>
           <Text>
             I know the pieces fit cuz I watched them fall away Mildewed and
@@ -96,39 +91,6 @@ const Bio = () => {
           </Text>
         </Box>
       </Center>
-      <Flex align="center" justify="center" minH="5vh" mt="1em">
-        <HStack spacing="24px">
-          <Box>
-            <Text fontSize="xs">Proudly made with React and Chakra</Text>
-          </Box>
-        </HStack>
-      </Flex>
-      <Flex align="center" justify="center" minH="15vh">
-        <HStack spacing="24px">
-          <Box>
-            <Text
-              as="a"
-              href="https://reactjs.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              fontSize="6xl"
-            >
-              <ReactLogo />
-            </Text>
-          </Box>
-          <Box>
-            <Text
-              as="a"
-              href="https://chakra-ui.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              fontSize="4xl"
-            >
-              <ChakraLogo />
-            </Text>
-          </Box>
-        </HStack>
-      </Flex>
     </>
   )
 }

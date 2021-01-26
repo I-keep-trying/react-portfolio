@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import {
-  Heading,
   HStack,
   IconButton,
   Link,
@@ -17,14 +16,16 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  useColorModeValue,
   Skeleton,
 } from '@chakra-ui/react'
 import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { NavLink } from 'react-router-dom'
-import Logo from '../Logo'
+import { Logo1 } from '../Logo'
 import routes from '../../config/paths'
+import useEventListener from '../../services/use-event-listener'
+
 import '../../App.css'
-import smartscroll from '../../services/smartScroll'
 
 const ThemeToggle = () => {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -50,23 +51,49 @@ const ThemeToggle = () => {
 }
 
 export const Navbar = () => {
+  const [scrollPosition, setScrollPosition] = useState(0)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
 
-  smartscroll()
+  const handleScroll = () => {
+    window.prevOffset = 0
+    const position = window.pageYOffset
+    const header = document.getElementById('header-wrap')
+
+    setScrollPosition(position)
+    if (position > scrollPosition + 25 || position < 100) {
+      header.style.top = '-8em'
+      header.style.transition = 'top 666ms'
+    }
+    if (position < scrollPosition - 25 || position < 75) {
+      header.style.top = '0'
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
     <>
       <Flex
         id="header-wrap"
+        bg={useColorModeValue('white', 'gray.800')}
         align="center"
         justify="flex-end"
         wrap="wrap"
         w="100%"
-        p={8}
+        h="10%"
+        mt=".5em"
       >
-        <Heading as="h1" size="lg">
-          <Logo />
-        </Heading>
+        <Link align="center" pl={8} href="/">
+          <Box maxW="50px" >
+            <Logo1 />
+          </Box>
+        </Link>
         <Spacer />
 
         <>
@@ -89,9 +116,11 @@ export const Navbar = () => {
               <DrawerContent>
                 <DrawerCloseButton />
                 <DrawerBody>
+                  {/* mobile  */}
                   <VStack align="center">
                     {routes.map((route) => (
                       <Link
+                        onClick={onClose}
                         id="header-item"
                         as={NavLink}
                         key={route.path}
@@ -107,6 +136,7 @@ export const Navbar = () => {
             </DrawerOverlay>
           </Drawer>
         </>
+        {/* tablet and full size */}
         <HStack
           display={{ base: 'none', md: 'block' }}
           justify="flex-end"
@@ -119,7 +149,6 @@ export const Navbar = () => {
               as={NavLink}
               key={route.path}
               to={route.path}
-              activeClassName="active"
               exact
             >
               {route.name}
@@ -127,11 +156,18 @@ export const Navbar = () => {
           ))}
         </HStack>
 
-        <HStack spacing={4}>
+        <HStack pr={8} spacing={4}>
           <ThemeToggle />
         </HStack>
+        <div className="break"></div>
+        <Box mt=".5em" w="100%">
+          <Skeleton
+            startColor="#ff0080"
+            endColor="rgb(255, 94, 0)"
+            height="2px"
+          />
+        </Box>
       </Flex>
-      <Skeleton startColor="pink.500" endColor="orange.500" height="6px" />
     </>
   )
 }

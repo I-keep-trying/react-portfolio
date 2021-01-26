@@ -1,3 +1,11 @@
-* {
+/* * {
   border: 1px solid red !important;
+} */
+
+.header {
+  border: 1px solid blue !important;
+}
+
+.header2 {
+  border: 1px solid blueviolet !important;
 }

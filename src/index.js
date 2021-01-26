@@ -14,7 +14,6 @@ const theme = extendTheme({
   },
 })
 
-console.log('theme', theme)
 ReactDOM.render(
   <ChakraProvider theme={theme}>
     <Fonts />

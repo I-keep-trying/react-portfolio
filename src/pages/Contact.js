@@ -27,12 +27,10 @@ import {
   PopoverContent,
   PopoverBody,
   PopoverArrow,
-  HStack,
+  VStack,
 } from '@chakra-ui/react'
 import { sendMail, customDomains } from '../services/email'
 import Isemail from 'isemail'
-import ReactLogo from './../imgs/ReactSvgCli'
-import ChakraLogo from './../imgs/ChakraSvgCli'
 
 const Contact = () => {
   const [name, setName] = useState('')
@@ -97,130 +95,105 @@ const Contact = () => {
 
   return (
     <>
-      <Center h="100px">
-        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">Contact Me</Heading>
-      </Center>
-      <Flex width="Full" align="center" justifyContent="center">
-        <Box w="90%" maxWidth="500px">
-          <Box my={4} textAlign="left">
-            <form onSubmit={handleSubmit}>
-              <FormControl>
-                <InputGroup>
-                  <InputLeftAddon children="Name" />
+      <VStack>
+        <Center h="100px">
+          <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">
+            Contact Me
+          </Heading>
+        </Center>
+        <Flex width="Full" align="center" justifyContent="center">
+          <Box w="90%" maxWidth="500px">
+            <Box my={4} textAlign="left">
+              <form onSubmit={handleSubmit}>
+                <FormControl>
+                  <InputGroup>
+                    <InputLeftAddon children="Name" />
+                    <Input
+                      type="text"
+                      placeholder="User McUserface"
+                      maxLength="30"
+                      value={name}
+                      onChange={({ target }) => setName(target.value)}
+                    />
+                  </InputGroup>
+                </FormControl>
+
+                <InputGroup mt={6}>
+                  <InputLeftAddon children="Email" />
                   <Input
+                    onChange={onEmailInputChange}
                     type="text"
-                    placeholder="User McUserface"
-                    maxLength="30"
-                    value={name}
-                    onChange={({ target }) => setName(target.value)}
+                    placeholder="you@yourmail.com"
+                    maxLength="50"
+                    value={email}
+                    domains={customDomains}
+                    errorBorderColor="red.300"
+                    isInvalid={!valid}
                   />
                 </InputGroup>
-              </FormControl>
+                <Center>
+                  <Text mb="8px">
+                    Your email will never be shared or sold.{' '}
+                  </Text>
+                </Center>
+                <FormControl mt={6}>
+                  <Text mb="8px">Message:</Text>
+                  <Textarea
+                    placeholder="Tell me what you think..."
+                    maxLength="1000"
+                    value={message}
+                    onChange={onMessageInputChange}
+                  />
+                  <Flex>
+                    <Spacer />
+                    <Popover trigger="hover">
+                      <PopoverTrigger>
+                        <Box>
+                          {' '}
+                          <CircularProgress
+                            min={0}
+                            max={1000}
+                            value={value}
+                            size="50px"
+                            thickness="4px"
+                          >
+                            <CircularProgressLabel>
+                              {value}
+                            </CircularProgressLabel>
+                          </CircularProgress>
+                        </Box>
+                      </PopoverTrigger>
+                      <PopoverContent>
+                        <PopoverArrow />
 
-              <InputGroup mt={6}>
-                <InputLeftAddon children="Email" />
-                <Input
-                  onChange={onEmailInputChange}
-                  type="text"
-                  placeholder="you@yourmail.com"
-                  maxLength="50"
-                  value={email}
-                  domains={customDomains}
-                  errorBorderColor="red.300"
-                  isInvalid={!valid}
-                />
-              </InputGroup>
-              <Center>
-                <Text mb="8px">Your email will never be shared or sold. </Text>
-              </Center>
-              <FormControl mt={6}>
-                <Text mb="8px">Message:</Text>
-                <Textarea
-                  placeholder="Tell me what you think..."
-                  maxLength="1000"
-                  value={message}
-                  onChange={onMessageInputChange}
-                />
-                <Flex>
-                  <Spacer />
-                  <Popover trigger="hover">
-                    <PopoverTrigger>
-                      <Box>
-                        {' '}
-                        <CircularProgress
-                          min={0}
-                          max={1000}
-                          value={value}
-                          size="50px"
-                          thickness="4px"
-                        >
-                          <CircularProgressLabel>{value}</CircularProgressLabel>
-                        </CircularProgress>
-                      </Box>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                      <PopoverArrow />
+                        <PopoverBody>
+                          You have {value} characters remaining.
+                        </PopoverBody>
+                      </PopoverContent>
+                    </Popover>
+                  </Flex>
+                </FormControl>
 
-                      <PopoverBody>
-                        You have {value} characters remaining.
-                      </PopoverBody>
-                    </PopoverContent>
-                  </Popover>
-                </Flex>
-              </FormControl>
-
-              <Box my={4} textAlign="left">
-                <ButtonGroup spacing="6">
-                  <Button type="submit" onClick={handleSubmit}>
-                    Submit
-                  </Button>
-                  <Modal isOpen={isOpen} onClose={onClose} isCentered>
-                    <ModalOverlay />
-                    <ModalContent>
-                      <ModalHeader>{notify.title} </ModalHeader>
-                      <ModalCloseButton />
-                      <ModalBody>{notify.msg} </ModalBody>
-                    </ModalContent>
-                  </Modal>
-                </ButtonGroup>
-              </Box>
-            </form>
+                <Box my={4} textAlign="left">
+                  <ButtonGroup spacing="6">
+                    <Button type="submit" onClick={handleSubmit}>
+                      Submit
+                    </Button>
+                    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+                      <ModalOverlay />
+                      <ModalContent>
+                        <ModalHeader>{notify.title} </ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>{notify.msg} </ModalBody>
+                      </ModalContent>
+                    </Modal>
+                  </ButtonGroup>
+                </Box>
+              </form>
+            </Box>
           </Box>
-        </Box>
-      </Flex>
-      <Flex align="center" justify="center" minH="5vh" mt="1em">
-        <HStack spacing="24px">
-          <Box>
-            <Text fontSize="xs">Proudly made with React and Chakra</Text>
-          </Box>
-        </HStack>
-      </Flex>
-      <Flex align="center" justify="center" minH="15vh">
-        <HStack spacing="24px">
-          <Box>
-            <Text
-              as="a"
-              href="https://reactjs.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              fontSize="6xl"
-            >
-              <ReactLogo />
-            </Text>
-          </Box>
-          <Box>
-            <Text
-              as="a"
-              href="https://chakra-ui.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              fontSize="4xl"
-            >
-              <ChakraLogo />
-            </Text>
-          </Box>
-        </HStack>
-      </Flex>
+        </Flex>
+      </VStack>
     </>
   )
 }
