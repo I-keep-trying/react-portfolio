@@ -10,7 +10,7 @@ const GithubIcon = () => {
       href={'https://github.com/I-keep-trying'}
     >
       <Icon
-        width="5%"
+        width="15%"
         height="auto"
         viewBox="0 0 20 20" 
       >

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useLayoutEffect, useRef, useEffect } from 'react'
 import {
   HStack,
   IconButton,
@@ -53,13 +53,14 @@ export const ThemeToggle = () => {
 export const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0)
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
+  const btnRef = useRef()
+  const scrRef = useRef()
 
   const handleScroll = () => {
     window.prevOffset = 0
     const position = window.pageYOffset
     const header = document.getElementById('header-wrap')
-
+console.log('header',header)
     setScrollPosition(position)
     if (position > scrollPosition + 25 || position < 100) {
       header.style.top = '-8em'
@@ -70,7 +71,7 @@ export const Navbar = () => {
     }
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', handleScroll)
@@ -80,6 +81,7 @@ export const Navbar = () => {
   return (
     <>
       <Flex
+        ref={scrRef}
         id="header-wrap"
         bg={useColorModeValue('white', 'gray.800')}
         align="center"
