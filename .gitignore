@@ -4,3 +4,5 @@
 api.md
 fakeDictionary.txt
 src/repl.js
+src/pages/WordSearch2.js
+src/services/stringDiff2.js

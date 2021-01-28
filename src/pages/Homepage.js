@@ -1,4 +1,13 @@
-import { Box, Heading, Image, VStack, Text, Center } from '@chakra-ui/react'
+import {
+  Box,
+  Heading,
+  Image,
+  VStack,
+  Text,
+  IconButton,
+  Center,
+} from '@chakra-ui/react'
+import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom'
 import words from '../imgs/crypto.png'
 
@@ -6,9 +15,7 @@ const Homepage = () => {
   return (
     <>
       <Center h="100px">
-        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">
-          Apps
-        </Heading>
+        <Heading variant="with-gradient">Apps</Heading>
       </Center>
       <article>
         <VStack
@@ -19,6 +26,8 @@ const Homepage = () => {
           overflow="hidden"
           mx="auto"
         >
+          <Link to="https://google.com">here's a link</Link>
+          <h6>here's some text</h6>
           <Link to="/wordsearch">
             <Image
               h={56}

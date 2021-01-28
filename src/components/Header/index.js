@@ -21,11 +21,9 @@ import {
 } from '@chakra-ui/react'
 import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { NavLink } from 'react-router-dom'
-import { Logo1 } from '../Logo'
+import { Logo, Sun, Moon } from '../Logo'
 import routes from '../../config/paths'
-import useEventListener from '../../services/use-event-listener'
-
-import '../../App.css'
+//import '../../App.css'
 
 export const ThemeToggle = () => {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -34,14 +32,14 @@ export const ThemeToggle = () => {
       {colorMode === 'light' ? (
         <IconButton
           aria-label="dark mode"
-          icon={<MoonIcon />}
+          icon={<Moon />}
           onClick={toggleColorMode}
           variant="link"
         />
       ) : (
         <IconButton
           aria-label="light mode"
-          icon={<SunIcon />}
+          icon={<Sun />}
           onClick={toggleColorMode}
           variant="link"
         />
@@ -90,9 +88,7 @@ export const Navbar = () => {
         mt=".5em"
       >
         <Link align="center" pl={8} href="/">
-          <Box maxW="50px">
-            <Logo1 />
-          </Box>
+          <Logo boxSize={[14, 16, 18]} />
         </Link>
         <Spacer />
 
@@ -121,7 +117,6 @@ export const Navbar = () => {
                     {routes.map((route) => (
                       <Link
                         onClick={onClose}
-                        id="header-item"
                         as={NavLink}
                         key={route.path}
                         to={route.path}
@@ -146,20 +141,16 @@ export const Navbar = () => {
           spacing={4}
         >
           {routes.map((route) => (
-            <Link
-              id="header-item"
-              as={NavLink}
-              key={route.path}
-              to={route.path}
-              exact
-            >
+            <Link as={NavLink} key={route.path} to={route.path} exact>
               {route.name}
               {route.icon}
             </Link>
           ))}
         </HStack>
+        <Box ml="1em" w="10%">
+          <ThemeToggle />
+        </Box>
 
-        <ThemeToggle />
         <div className="break"></div>
         <Box mt=".5em" w="100%">
           <Skeleton

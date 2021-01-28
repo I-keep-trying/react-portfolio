@@ -97,7 +97,7 @@ const Contact = () => {
     <>
       <VStack>
         <Center h="100px">
-          <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">
+          <Heading variant="with-gradient">
             Contact Me
           </Heading>
         </Center>

@@ -8,6 +8,7 @@ import {
   Box,
   Heading,
   Center,
+  Container,
   FormControl,
   Input,
   InputGroup,
@@ -122,27 +123,6 @@ const SearchForm = () => {
   console.log('userInput', userInput)
 
   const handleSubmit = async (e) => {
-    console.log('submit e', e)
-    /* without event listener:
-    SyntheticBaseEvent {
-    bubbles: true
-    cancelable: true
-    currentTarget: null
-    defaultPrevented: true
-    eventPhase: 3
-    isDefaultPrevented: ƒ functionThatReturnsTrue()
-    isPropagationStopped: ƒ functionThatReturnsFalse()
-    isTrusted: true
-    nativeEvent: SubmitEvent {
-      isTrusted: true, submitter: button.chakra-button.css-1w5m1dh, 
-      type: "submit", target: form, currentTarget: null, …}
-    target: form
-    timeStamp: 14703.689999994822
-    type: "submit"
-    _reactName: "onSubmit"
-    _targetInst: null
-}
-    */
     e.preventDefault()
     setResults([])
     let wildcards1 = [...userInput.matchAll(/\?/g)]
@@ -160,7 +140,7 @@ const SearchForm = () => {
       setTimeout(() => {
         onClose()
       }, 3000)
-    } else if (userInput.length > 10) {
+    } else if (userInput.length > 30) {
       onOpen()
       setNotify({
         title: 'Whoa hang on a minute',
@@ -232,25 +212,25 @@ const SearchForm = () => {
   return (
     <>
       <Center h="100px">
-        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">
-          Word Search
-        </Heading>
+        <Heading variant="with-gradient">Word Search</Heading>
       </Center>
 
       <Flex width="Full" align="center" justifyContent="center">
         <Box textAlign="left" w="90%" maxWidth="500px">
           <Accordion allowMultiple>
-            <AccordionItem>
-              <AccordionButton>
-                <AccordionIcon />
-                <Box flex="1" textAlign="left">
-                  Use one ? for each individual unknown letter.
-                </Box>
-              </AccordionButton>
-              <AccordionPanel pb={4}>
-                Example: b?ar might return bear, or boar.
-              </AccordionPanel>
-            </AccordionItem>
+            <Tooltip label="Expand for details" aria-label="Expand for details">
+              <AccordionItem>
+                <AccordionButton>
+                  <AccordionIcon />
+                  <Box flex="1" textAlign="left">
+                    Use one ? for each individual unknown letter.
+                  </Box>
+                </AccordionButton>
+                <AccordionPanel pb={4}>
+                  Example: b?ar might return bear, or boar.
+                </AccordionPanel>
+              </AccordionItem>
+            </Tooltip>
 
             <AccordionItem>
               <AccordionButton>
@@ -366,8 +346,8 @@ const SearchForm = () => {
                 </FormControl>
               </Tooltip>
             </Box>
-            <Box my={8} textAlign="left">
-              <ButtonGroup spacing="2">
+            <Container textAlign="left">
+              <ButtonGroup spacing={[1, 4, 6]}>
                 <Button size="sm" type="submit">
                   Search
                 </Button>
@@ -393,7 +373,7 @@ const SearchForm = () => {
                       <Button size="sm">{copiedButton} </Button>
                     </CopyToClipboard>
                     <Button size="sm" onClick={resetForm}>
-                      Reset Form
+                      Reset
                     </Button>
                   </>
                 ) : (
@@ -410,7 +390,7 @@ const SearchForm = () => {
                   <ListItem key={nanoid()}>{obj.word}</ListItem>
                 ))}
               </List>
-            </Box>
+            </Container>
           </form>
         </Box>
       </Flex>

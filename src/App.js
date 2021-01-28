@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import { Grid } from '@chakra-ui/react'
 import Header from './components/Header'
@@ -15,7 +15,6 @@ const App = () => {
     <>
       <Grid direction="column" align="center">
         <Header />
-        {/*         <Router> */}
         <Switch>
           {routes.map(({ path, Component }) => {
             return (
@@ -38,7 +37,6 @@ const App = () => {
           <Route>
             <Error />
           </Route>
-          {/*         </Router> */}
         </Switch>
         <Footer />
       </Grid>

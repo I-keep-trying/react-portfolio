@@ -1,18 +1,17 @@
 import React from 'react'
-import { Center, Flex, Button, Container, Heading } from '@chakra-ui/react'
+import { Center, Flex, Box, Button, Container, Heading } from '@chakra-ui/react'
 import GithubIcon from '../components/Logo/GithubIcon-lg'
 
 const Resume = () => {
   return (
     <>
       <Center h="100px">
-        <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">
-          Resume
-        </Heading>
+        <Heading variant="with-gradient">Resume</Heading>
       </Center>
       <Center>
         <Button
-          size="large"
+          size="xl"
+          variant="link"
           as="a"
           href="https://docs.google.com/document/d/11g4Rjr6Pguz2MVFf81_A8X4rokyZMo2PGLpFBlNo-tM/preview"
           target="_blank"
@@ -21,20 +20,11 @@ const Resume = () => {
           View Resume
         </Button>
       </Center>
-      <Container>
-        <Flex
-          height="100%"
-          width="100%"
-          align="center"
-          justify="center"
-          mt="2em"
-          mb="2em"
-        >
-          <GithubIcon />
-        </Flex>
-      </Container>
+      <Center h="100px">
+        <GithubIcon />
+      </Center>
 
-     {/*  <Container>
+      {/*  <Container>
         <Flex
           height="50%"
           width="100%"

@@ -3,7 +3,8 @@ import Bio from '../pages/Bio'
 import Contact from '../pages/Contact'
 import Resume from '../pages/Resume'
 import WordSearch from '../pages/WordSearchForm'
-import Error from '../pages/Error'
+import WordSearch2 from '../pages/WordSearch2'
+
 import GithubIcon from '../components/Logo/GithubIcon'
 import ThemeToggle from '../components/Header'
 
@@ -33,6 +34,12 @@ const paths = [
     path: '/wordsearch',
     Component: WordSearch,
   },
+/*   {
+    icon: '',
+    name: 'WordSearch2',
+    path: '/wordsearch2',
+    Component: WordSearch2,
+  }, */
   {
     icon: '',
     name: 'Contact',
@@ -40,13 +47,13 @@ const paths = [
     Component: Contact,
   },
 
-/*   {
+  /*   {
     icon: <GithubIcon />,
     name: '',
     path: '/contact',
     Component: Contact,
   }, */
-/*   {
+  /*   {
     icon: <ThemeToggle />,
     name: '',
     path: '',

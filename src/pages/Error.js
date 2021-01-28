@@ -4,7 +4,7 @@ import { Heading, Center } from '@chakra-ui/react'
 const Error = () => {
   return (
     <Center mt={40}>
-      <Heading bgClip="text" bgGradient="linear(to-l, orange.500,#FF0080)">
+      <Heading variant="with-gradient">
         Page Not Found
       </Heading>
     </Center>
