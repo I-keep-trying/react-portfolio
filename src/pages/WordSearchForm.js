@@ -120,7 +120,6 @@ const SearchForm = () => {
       }
     })
   }
-  console.log('userInput', userInput)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -180,6 +179,12 @@ const SearchForm = () => {
         return filterExclusions(r, wildcards2)
       }
     }
+  }
+
+  const handleSubmit2 = async (e) => {
+    const s = await getWords(userInput)
+    console.log('new button', s)
+    setResults(s)
   }
 
   const copyResults = () => {
@@ -288,7 +293,6 @@ const SearchForm = () => {
                       maxLength="30"
                       value={userInput}
                       onChange={(e) => {
-                        console.log('e.key', e)
                         return setUserInput(e.target.value.toLowerCase())
                       }}
                     />
@@ -347,7 +351,7 @@ const SearchForm = () => {
               </Tooltip>
             </Box>
             <Container textAlign="left">
-              <button type="submit" >submit</button>
+              <button onClick={handleSubmit2}>submit</button>
               <ButtonGroup spacing={[1, 4, 6]}>
                 <Button size="sm" type="submit">
                   Search
