@@ -26,8 +26,6 @@ const Homepage = () => {
           overflow="hidden"
           mx="auto"
         >
-          <Link to="https://google.com">here's a link</Link>
-          <h6>here's some text</h6>
           <Link to="/wordsearch">
             <Image
               h={56}

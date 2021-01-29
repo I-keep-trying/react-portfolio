@@ -7,14 +7,6 @@ import extendTheme from './theme/index.js'
 import App from './App'
 //import './index.css'
 
-/* const theme = extendTheme({
-  initialColorMode: 'dark',
-  fonts: {
-    heading: 'Open Sans',
-    body: 'Raleway',
-  },
-}) */
-
 ReactDOM.render(
   <ChakraProvider theme={extendTheme}>
     <Fonts />

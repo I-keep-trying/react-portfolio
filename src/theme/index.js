@@ -4,7 +4,7 @@ import styles from './styles'
 // Foundational style overrides
 //import borders from "./foundations/borders"
 // Component style overrides
-import Button from '../components/Button/index.js'
+import Button, { IconButton } from '../components/Button/index.js'
 const overrides = {
   colors: {
     brand: {
@@ -33,6 +33,7 @@ const overrides = {
         },
         _active: { textDecoration: 'none' },
       },
+     
     },
   },
   // Other foundational style overrides go here
@@ -43,6 +44,7 @@ const overrides = {
   },
   components: {
     //  Button,
+    IconButton,
     Heading: {
       variants: {
         'with-gradient': {

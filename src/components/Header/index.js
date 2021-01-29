@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import {
   HStack,
   IconButton,
-  Link,
+  //Link,
   useColorMode,
   Box,
   Text,
@@ -20,7 +20,7 @@ import {
   Skeleton,
 } from '@chakra-ui/react'
 import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { Logo, Sun, Moon } from '../Logo'
 import routes from '../../config/paths'
 //import '../../App.css'
@@ -28,7 +28,7 @@ import routes from '../../config/paths'
 export const ThemeToggle = () => {
   const { colorMode, toggleColorMode } = useColorMode()
   return (
-    <Box mr={8}>
+    <>
       {colorMode === 'light' ? (
         <IconButton
           aria-label="dark mode"
@@ -44,7 +44,7 @@ export const ThemeToggle = () => {
           variant="link"
         />
       )}
-    </Box>
+    </>
   )
 }
 
@@ -85,11 +85,15 @@ export const Navbar = () => {
         wrap="wrap"
         w="100%"
         h="10%"
-        mt=".5em"
       >
-        <Link align="center" pl={8} href="/">
-          <Logo boxSize={[14, 16, 18]} />
-        </Link>
+        <Box w="5%">
+          <IconButton
+            aria-label="logo"
+            variant="link"
+            size="lg"
+            icon={<Logo />}
+          />
+        </Box>
         <Spacer />
 
         <>
@@ -98,7 +102,8 @@ export const Navbar = () => {
             onClick={onOpen}
             display={{ base: 'block', md: 'none' }}
             as={IconButton}
-            aria-label=""
+            aria-label="open or close mobile menu"
+            variant="unstyled"
             icon={<HamburgerIcon />}
           />
           <Drawer
@@ -117,7 +122,7 @@ export const Navbar = () => {
                     {routes.map((route) => (
                       <Link
                         onClick={onClose}
-                        as={NavLink}
+                        /*  as={NavLink} */
                         key={route.path}
                         to={route.path}
                         exact
@@ -141,18 +146,23 @@ export const Navbar = () => {
           spacing={4}
         >
           {routes.map((route) => (
-            <Link as={NavLink} key={route.path} to={route.path} exact>
+            <Link
+              /*  as={NavLink}  */
+              key={route.path}
+              to={route.path}
+              exact
+            >
               {route.name}
               {route.icon}
             </Link>
           ))}
         </HStack>
-        <Box ml="1em" w="10%">
+        <Box ml={0} mr={5} w="5%">
           <ThemeToggle />
         </Box>
 
         <div className="break"></div>
-        <Box mt=".5em" w="100%">
+        <Box w="100%">
           <Skeleton
             startColor="#ff0080"
             endColor="rgb(255, 94, 0)"

@@ -27,9 +27,27 @@ const Button = {
       },
     }, */
   // The default size and variant values
+  _hover: {
+    bg: 'none',
+  },
   defaultProps: {
     size: ['sm', 'md', 'lg', 'xl'],
     variant: 'link',
+    _hover: {
+      bg: 'none',
+    },
+  },
+}
+
+export const IconButton = {
+  _hover: {
+    bg: 'none',
+  },
+  defaultProps: {
+    variant: 'unstyled',
+    _hover: {
+      bg: 'none',
+    },
   },
 }
 

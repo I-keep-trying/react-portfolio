@@ -10,6 +10,8 @@
 <h1 align="center">Build Accessible React Apps with Speed ⚡️</h1>
 <br />
 
+https://react-svgr.com/
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7f1e1e37-40eb-4bde-b092-5a79ed202c38/deploy-status)](https://app.netlify.com/sites/affectionate-austin-e78d61/deploys)
 
 [Demo](https://affectionate-austin-e78d61.netlify.app/#/)

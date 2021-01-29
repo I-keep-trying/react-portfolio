@@ -347,6 +347,7 @@ const SearchForm = () => {
               </Tooltip>
             </Box>
             <Container textAlign="left">
+              <button type="submit" >submit</button>
               <ButtonGroup spacing={[1, 4, 6]}>
                 <Button size="sm" type="submit">
                   Search
