@@ -4,10 +4,8 @@ import {
   Image,
   VStack,
   Text,
-  IconButton,
   Center,
 } from '@chakra-ui/react'
-import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom'
 import words from '../imgs/crypto.png'
 

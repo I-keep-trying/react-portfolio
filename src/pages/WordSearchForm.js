@@ -29,7 +29,6 @@ import {
   IconButton,
   Text,
   Tooltip,
-  HStack,
 } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -47,8 +46,12 @@ const SearchForm = () => {
   const [buttonText, setButtonText] = useState('Sort a-z')
   const [copiedButton, setCopiedButton] = useState('Copy List')
   const [notify, setNotify] = useState({ title: '', msg: '' })
+    // eslint-disable-next-line no-unused-vars
+  const [loading, setLoading] = useState(false)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const isEdge = /Edge/.test(navigator.userAgent)
 
   const handleKeyDown = (event) => {
     if (event.keyCode === 13) {
@@ -63,73 +66,16 @@ const SearchForm = () => {
     }
   })
 
-  const handleSort = () => {
-    const newResults = [...results]
-    const sort1 = results.sort((a, b) => (a.word < b.word ? 1 : -1))
-    const sort1tog = () => {
-      setToggle(false)
-      setButtonText('Sort a - z')
-
-      setResults(sort1)
-    }
-    const sort2 = newResults.sort((a, b) => (a.word < b.word ? -1 : 1))
-
-    const sort2tog = () => {
-      setToggle(true)
-      setButtonText('Sort z - a')
-
-      setResults(sort2)
-    }
-    toggle === false ? sort2tog() : sort1tog()
-  }
-
-  const filterExclusions = async (arr, reg) => {
-    const exArr = exclusions.split('').join('|')
-    const regx = new RegExp(`${exArr}`, 'g')
-    const reduceArr = arr.reduce((acc, item) => {
-      for (let i in reg) {
-        let currChar = item.word.charAt(reg[i].index)
-        let matchedItem = [...currChar.matchAll(regx)]
-        if (matchedItem.length > 0) {
-          acc.push(item.word)
-        }
-      }
-      return acc
-    }, [])
-
-    const filterArr = arr.filter((obj) => {
-      return reduceArr.includes(obj.word) ? null : obj.word
-    })
-    if (reg[0][0] !== '?') {
-      filterStrings(userInput, filterArr)
-    } else {
-      setResults((state) => [...state, ...filterArr])
-    }
-  }
-
-  const filterStrings = (arr1, arr2) => {
-    return arr2.forEach((obj) => {
-      const newArr = stringDiff(arr1, obj.word)
-
-      if (newArr.error) {
-        setNotify({ msg: `Error: ${newArr.error}; Param: ${obj.word}` })
-      } else if (newArr.results.length > 0) {
-        setResults((state) => [...state, ...newArr.results])
-      } else {
-        return results
-      }
-    })
+  const filterResults = (arr1, arr2) => {
+    const newArr = stringDiff(arr1, arr2, exclusions)
+    setResults((state) => [...state, ...newArr])
+    return results
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setResults([])
-    let wildcards1 = [...userInput.matchAll(/\?/g)]
-    let numeric = userInput.match(/\d/g)
-    let wildcards2 = [...userInput.matchAll(/\d/g)]
-    const regx = /\d/g
-    const numUserInput = userInput.replace(regx, '?')
-    let r
+    const numUserInput = userInput.replace(/\d/g, '?').toLowerCase()
     if (userInput.length === 0) {
       onOpen()
       setNotify({
@@ -158,33 +104,57 @@ const SearchForm = () => {
       setTimeout(() => {
         onClose()
       }, 3000)
-    } else if (!exclusions) {
-      if (wildcards1.length > 0 || numeric === null) {
-        r = await getWords(userInput)
-        setResults((state) => [...state, ...r])
-      } else if (numeric !== null) {
-        r = await getWords(numUserInput)
-        return filterStrings(userInput, r)
-      } else {
-        setNotify({
-          msg: 'something weird happened...',
-        })
-      }
+    } else if (exclusions.length >= 0 && userInput.length === 0) {
+      onOpen()
+      setNotify({
+        title: 'Missing information',
+        msg: 'Please enter something in the search field.',
+      })
+      setTimeout(() => {
+        onClose()
+      }, 3000)
     } else {
-      if (wildcards1.length > 0) {
-        r = await getWords(userInput)
-        return filterExclusions(r, wildcards1)
+      setLoading(true)
+      handleValidation(userInput, exclusions)
+
+      const r = await getWords(numUserInput)
+      setLoading(false)
+      if (r[0].word === 'No results') {
+        setResults(r)
       } else {
-        r = await getWords(numUserInput)
-        return filterExclusions(r, wildcards2)
+        return filterResults(userInput.toLowerCase(), r)
       }
     }
   }
 
-  const handleSubmit2 = async (e) => {
+/*   const handleSubmit2 = async (e) => {
+    console.log('navigator.appName', navigator.appName)
     const s = await getWords(userInput)
     console.log('new button', s)
     setResults(s)
+  } */
+
+  const handleValidation = (input, excl) => {
+    const regx = new RegExp(
+      '0|%|&|#|@|,|<|>|`|~|_|=|\\^|\\||\\*|\\$|\\-|\\+|\\[|\\]|\\;|\\/|\\.|\\,|\'|\\(|\\)|\\!|\\"',
+      'g'
+    )
+
+    const valInput = input?.match(regx)
+    const valExcl = excl?.match(regx)
+    const fixInput = userInput?.replace(valInput, '')
+    const fixExclusions = exclusions?.replace(valExcl, '')
+    if (userInput.length > 0 || exclusions.length > 0) {
+      if (valInput || valExcl) {
+        setUserInput(fixInput)
+        setExclusions(fixExclusions)
+        if (valInput[0] === '0') {
+          setNotify({ msg: 'Please only use digits 1 - 9 for wildcards.' })
+        } else {
+          setNotify({ msg: 'Please restrict entries to letters a - z.' })
+        }
+      }
+    }
   }
 
   const copyResults = () => {
@@ -205,6 +175,26 @@ const SearchForm = () => {
 
   const resetExclusionsField = () => {
     setExclusions('')
+  }
+
+  const handleSort = () => {
+    const newResults = [...results]
+    const sort1 = results.sort((a, b) => (a.word < b.word ? 1 : -1))
+    const sort1tog = () => {
+      setToggle(false)
+      setButtonText('Sort a - z')
+
+      setResults(sort1)
+    }
+    const sort2 = newResults.sort((a, b) => (a.word < b.word ? -1 : 1))
+
+    const sort2tog = () => {
+      setToggle(true)
+      setButtonText('Sort z - a')
+
+      setResults(sort2)
+    }
+    toggle === false ? sort2tog() : sort1tog()
   }
 
   const resetForm = () => {
@@ -296,7 +286,7 @@ const SearchForm = () => {
                         return setUserInput(e.target.value.toLowerCase())
                       }}
                     />
-                    {userInput.length > 0 ? (
+                    {userInput.length > 0 && !isEdge ? (
                       <InputRightElement
                         children={
                           <IconButton
@@ -331,7 +321,7 @@ const SearchForm = () => {
                         setExclusions(target.value.toLowerCase())
                       }
                     />
-                    {exclusions.length > 0 ? (
+                    {exclusions.length > 0 && !isEdge ? (
                       <InputRightElement
                         children={
                           <IconButton
@@ -351,7 +341,6 @@ const SearchForm = () => {
               </Tooltip>
             </Box>
             <Container textAlign="left">
-              <button onClick={handleSubmit2}>submit</button>
               <ButtonGroup spacing={[1, 4, 6]}>
                 <Button size="sm" type="submit">
                   Search

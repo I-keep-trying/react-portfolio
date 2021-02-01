@@ -1,5 +1,5 @@
 import React from 'react'
-import { Center, Flex, Box, Button, Container, Heading } from '@chakra-ui/react'
+import { Center, Button, Heading } from '@chakra-ui/react'
 import GithubIcon from '../components/Logo/GithubIcon-lg'
 
 const Resume = () => {

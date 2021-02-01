@@ -1,10 +1,10 @@
 import { extendTheme } from '@chakra-ui/react'
 // Global style overrides
-import styles from './styles'
+//import styles from './styles'
 // Foundational style overrides
 //import borders from "./foundations/borders"
 // Component style overrides
-import Button, { IconButton } from '../components/Button/index.js'
+import { IconButton } from '../components/Button/index.js'
 const overrides = {
   colors: {
     brand: {
@@ -33,7 +33,6 @@ const overrides = {
         },
         _active: { textDecoration: 'none' },
       },
-     
     },
   },
   // Other foundational style overrides go here

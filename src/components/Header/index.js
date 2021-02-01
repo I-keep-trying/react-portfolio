@@ -1,11 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   HStack,
   IconButton,
   //Link,
   useColorMode,
   Box,
-  Text,
   Flex,
   Spacer,
   VStack,
@@ -18,14 +17,19 @@ import {
   DrawerCloseButton,
   useColorModeValue,
   Skeleton,
+  Link,
 } from '@chakra-ui/react'
-import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
-import { NavLink, Link } from 'react-router-dom'
+import { HamburgerIcon } from '@chakra-ui/icons'
+import {
+  NavLink,
+  // Link
+} from 'react-router-dom'
 import { Logo, Sun, Moon } from '../Logo'
+
 import routes from '../../config/paths'
 //import '../../App.css'
 
-export const ThemeToggle = () => {
+export const ThemeToggle = (props) => {
   const { colorMode, toggleColorMode } = useColorMode()
   return (
     <>
@@ -53,6 +57,8 @@ export const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
 
+  const isEdge = /Edge/.test(navigator.userAgent)
+
   const handleScroll = () => {
     window.prevOffset = 0
     const position = window.pageYOffset
@@ -73,6 +79,7 @@ export const Navbar = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -122,7 +129,7 @@ export const Navbar = () => {
                     {routes.map((route) => (
                       <Link
                         onClick={onClose}
-                        /*  as={NavLink} */
+                        as={NavLink}
                         key={route.path}
                         to={route.path}
                         exact
@@ -146,19 +153,14 @@ export const Navbar = () => {
           spacing={4}
         >
           {routes.map((route) => (
-            <Link
-              /*  as={NavLink}  */
-              key={route.path}
-              to={route.path}
-              exact
-            >
+            <Link as={NavLink} key={route.path} to={route.path} exact>
               {route.name}
               {route.icon}
             </Link>
           ))}
         </HStack>
         <Box ml={0} mr={5} w="5%">
-          <ThemeToggle />
+          <ThemeToggle props={isEdge} />
         </Box>
 
         <div className="break"></div>
