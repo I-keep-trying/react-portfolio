@@ -2,7 +2,7 @@ import Homepage from '../pages/Homepage'
 import Bio from '../pages/Bio'
 import Contact from '../pages/Contact'
 import Resume from '../pages/Resume'
-import SearchForm from '../pages/WordSearchForm'
+//import SearchForm from '../pages/WordSearchForm'
 
 const paths = [
   {
@@ -10,17 +10,16 @@ const paths = [
     path: '/',
     Component: Homepage,
   },
-  {
+/*   {
     name: 'Word Search',
     path: '/wordsearch',
     Component: SearchForm,
   },
-  {
+ */  {
     name: 'Bio',
     path: '/bio',
     Component: Bio,
   },
-
   {
     name: 'Resume',
     path: '/resume',

@@ -20,10 +20,7 @@ const Homepage = () => {
       </Center>
 
       <Flex width="Full" align="center" justifyContent="center">
-        <Link
-          href="https://hungry-bhabha-639136.netlify.app/"
-          isExternal
-        >
+        <Link href="https://pure-bastion-10905.herokuapp.com/" isExternal>
           <Image
             h={56}
             objectFit="cover"
