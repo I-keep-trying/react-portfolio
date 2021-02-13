@@ -21,7 +21,6 @@ export const stringDiff = (a, b, c) => {
     })
 
   if (results.length === 0) {
-    console.log('stringDiff results', results)
     return [{ word: 'Nothing matches the pattern.' }]
   }
   return results

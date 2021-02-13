@@ -35,6 +35,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
 import { stringDiff } from '../services/stringDiff'
 import { getWords } from '../services/dictionary'
+import { SpinnerLogo } from '../components/Logo'
 
 const SearchForm = () => {
   const [results, setResults] = useState([])
@@ -46,7 +47,7 @@ const SearchForm = () => {
   const [buttonText, setButtonText] = useState('Sort a-z')
   const [copiedButton, setCopiedButton] = useState('Copy List')
   const [notify, setNotify] = useState({ title: '', msg: '' })
-    // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -127,13 +128,6 @@ const SearchForm = () => {
     }
   }
 
-/*   const handleSubmit2 = async (e) => {
-    console.log('navigator.appName', navigator.appName)
-    const s = await getWords(userInput)
-    console.log('new button', s)
-    setResults(s)
-  } */
-
   const handleValidation = (input, excl) => {
     const regx = new RegExp(
       '0|%|&|#|@|,|<|>|`|~|_|=|\\^|\\||\\*|\\$|\\-|\\+|\\[|\\]|\\;|\\/|\\.|\\,|\'|\\(|\\)|\\!|\\"',
@@ -209,7 +203,7 @@ const SearchForm = () => {
       <Center h="100px">
         <Heading variant="with-gradient">Word Search</Heading>
       </Center>
-
+      {loading ? <SpinnerLogo h="20vmin" pointerEvents="none" /> : <></>}
       <Flex width="Full" align="center" justifyContent="center">
         <Box textAlign="left" w="90%" maxWidth="500px">
           <Accordion allowMultiple>
@@ -342,7 +336,7 @@ const SearchForm = () => {
             </Box>
             <Container textAlign="left">
               <ButtonGroup spacing={[1, 4, 6]}>
-                <Button size="sm" type="submit">
+                <Button onClick={handleSubmit} size="sm" type="submit">
                   Search
                 </Button>
                 <Modal isOpen={isOpen} onClose={onClose} isCentered>

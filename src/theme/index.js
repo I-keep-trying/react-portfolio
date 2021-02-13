@@ -1,10 +1,5 @@
 import { extendTheme } from '@chakra-ui/react'
-// Global style overrides
-//import styles from './styles'
-// Foundational style overrides
-//import borders from "./foundations/borders"
-// Component style overrides
-import { IconButton } from '../components/Button/index.js'
+
 const overrides = {
   colors: {
     brand: {
@@ -35,15 +30,12 @@ const overrides = {
       },
     },
   },
-  // Other foundational style overrides go here
   initialColorMode: 'dark',
   fonts: {
     heading: 'Open Sans',
     body: 'Raleway',
   },
   components: {
-    //  Button,
-    IconButton,
     Heading: {
       variants: {
         'with-gradient': {
@@ -57,6 +49,7 @@ const overrides = {
       _hover: {
         textDecoration: 'none',
       },
+      _active: { textDecoration: 'none' },
     },
   },
 }

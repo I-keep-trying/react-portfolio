@@ -1,6 +1,12 @@
 import React from 'react'
-import { Icon } from '@chakra-ui/react'
+import { Icon, Image, keyframes, usePrefersReducedMotion } from '@chakra-ui/react'
+import spinIcon from '../../imgs/abstract-013.svg'
 import './logo.css'
+
+const spin = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`;
 
 export const Logo = (props) => {
   return (
@@ -92,4 +98,14 @@ export const Moon = (props) => {
       </Icon>
     </>
   )
+}
+
+export const SpinnerLogo = (props) => {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const animation = prefersReducedMotion
+    ? undefined
+    : `${spin} infinite 5s linear`;
+
+  return <Image animation={animation} src={spinIcon} {...props} />;
 }

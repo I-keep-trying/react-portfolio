@@ -5,8 +5,11 @@ import {
   VStack,
   Text,
   Center,
+  Link,
+  Flex,
+  Square,
 } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { FaExternalLinkAlt } from 'react-icons/fa'
 import words from '../imgs/crypto.png'
 
 const Homepage = () => {
@@ -15,19 +18,42 @@ const Homepage = () => {
       <Center h="100px">
         <Heading variant="with-gradient">Apps</Heading>
       </Center>
-      <article>
-        <VStack
-          maxW="xs"
-          align="center"
-          shadow="lg"
-          rounded="lg"
-          overflow="hidden"
-          mx="auto"
+
+      <Flex width="Full" align="center" justifyContent="center">
+        <Link
+          href="https://hungry-bhabha-639136.netlify.app/"
+          isExternal
         >
-          <Link to="/wordsearch">
+          <Image
+            h={56}
+            objectFit="cover"
+            objectPosition="center"
+            rounded="lg"
+            src={words}
+            alt="avatar"
+          />
+          <Center h="50px" w="200px">
+            <Heading as="h3" size="md">
+              Word Search
+            </Heading>
+            <FaExternalLinkAlt />
+          </Center>
+          <Box id="header-item" align="center" p={4}>
+            <Text fontSize="sm">For cryptogram and crossword puzzles.</Text>
+          </Box>
+        </Link>
+      </Flex>
+      {/*   <article>
+       
+          <Flex width="Full" align="center" justifyContent="center">
+          <Link
+          href="https://hungry-bhabha-639136.netlify.app/"
+          isExternal
+          className="external"
+        >
             <Image
               h={56}
-              w="full"
+            
               objectFit="cover"
               objectPosition="center"
               rounded="lg"
@@ -41,9 +67,10 @@ const Homepage = () => {
               </Heading>
               <Text fontSize="sm">For cryptogram and crossword puzzles.</Text>
             </Box>
-          </Link>
-        </VStack>
-      </article>
+         
+        </Link>
+        </Flex>
+      </article> */}
     </>
   )
 }

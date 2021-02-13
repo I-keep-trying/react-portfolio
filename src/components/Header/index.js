@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
-  HStack,
   IconButton,
-  //Link,
   useColorMode,
   Box,
   Flex,
@@ -18,18 +16,16 @@ import {
   useColorModeValue,
   Skeleton,
   Link,
+  SimpleGrid,
+  Container,
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
-import {
-  NavLink,
-  // Link
-} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Logo, Sun, Moon } from '../Logo'
 
 import routes from '../../config/paths'
-//import '../../App.css'
 
-export const ThemeToggle = (props) => {
+export const ThemeToggle = () => {
   const { colorMode, toggleColorMode } = useColorMode()
   return (
     <>
@@ -57,8 +53,6 @@ export const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
 
-  const isEdge = /Edge/.test(navigator.userAgent)
-
   const handleScroll = () => {
     window.prevOffset = 0
     const position = window.pageYOffset
@@ -79,7 +73,7 @@ export const Navbar = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -135,7 +129,6 @@ export const Navbar = () => {
                         exact
                       >
                         {route.name}
-                        {route.icon}
                       </Link>
                     ))}
                   </VStack>
@@ -146,30 +139,28 @@ export const Navbar = () => {
         </>
         {/* tablet and full size */}
 
-        <HStack
-          display={{ base: 'none', md: 'block' }}
-          justify="flex-end"
-          align="right"
-          spacing={4}
-        >
-          {routes.map((route) => (
-            <Link as={NavLink} key={route.path} to={route.path} exact>
-              {route.name}
-              {route.icon}
-            </Link>
-          ))}
-        </HStack>
+        <Container display={{ base: 'none', md: 'block' }} centerContent>
+          <SimpleGrid columns={6} spacing={4}>
+            <Box height="4vh"></Box>
+            <Box height="4vh"></Box>
+            {routes.map((route) => (
+              <>
+                <Box height="4vh">
+                  <Link as={NavLink} key={route.path} to={route.path} exact>
+                    {route.name}
+                  </Link>
+                </Box>
+              </>
+            ))}
+          </SimpleGrid>
+        </Container>
         <Box ml={0} mr={5} w="5%">
-          <ThemeToggle props={isEdge} />
+          <ThemeToggle />
         </Box>
 
         <div className="break"></div>
         <Box w="100%">
-          <Skeleton
-            startColor="#ff0080"
-            endColor="rgb(255, 94, 0)"
-            height="2px"
-          />
+          <Skeleton startColor="#ff0080" endColor="#7928CA" height="2px" />
         </Box>
       </Flex>
     </>

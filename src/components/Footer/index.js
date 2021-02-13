@@ -7,7 +7,7 @@ import chakraLogo from '../../imgs/chakra-logo.png'
 function Footer() {
   return (
     <Box bg={useColorModeValue('white', 'gray.800')} id="footer-wrap">
-      <Center h="10px" pt="5" color="white">
+      <Center h="10px" pt="5">
         <Text fontSize="xs">Proudly made with React and Chakra</Text>
       </Center>
       <Center h="80px">
