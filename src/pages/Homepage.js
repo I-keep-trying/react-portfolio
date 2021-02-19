@@ -1,16 +1,7 @@
-import {
-  Box,
-  Heading,
-  Image,
-  VStack,
-  Text,
-  Center,
-  Link,
-  Flex,
-  Square,
-} from '@chakra-ui/react'
+import { Box, Heading, Image, Text, Center, Link, Flex } from '@chakra-ui/react'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 import words from '../imgs/crypto.png'
+import healthapp from '../imgs/health.png'
 
 const Homepage = () => {
   return (
@@ -27,7 +18,7 @@ const Homepage = () => {
             objectPosition="center"
             rounded="lg"
             src={words}
-            alt="avatar"
+            alt="search app"
           />
           <Center h="50px" w="200px">
             <Heading as="h3" size="md">
@@ -39,35 +30,26 @@ const Homepage = () => {
             <Text fontSize="sm">For cryptogram and crossword puzzles.</Text>
           </Box>
         </Link>
-      </Flex>
-      {/*   <article>
-       
-          <Flex width="Full" align="center" justifyContent="center">
-          <Link
-          href="https://hungry-bhabha-639136.netlify.app/"
-          isExternal
-          className="external"
-        >
-            <Image
-              h={56}
-            
-              objectFit="cover"
-              objectPosition="center"
-              rounded="lg"
-              shadow="lg"
-              src={words}
-              alt="avatar"
-            />
-            <Box id="header-item" align="center" p={4}>
-              <Heading as="h3" size="md">
-                Word Search
-              </Heading>
-              <Text fontSize="sm">For cryptogram and crossword puzzles.</Text>
-            </Box>
-         
+        <Link href="https://damp-journey-91890.herokuapp.com/" isExternal>
+          <Image
+            w={56}
+            objectFit="cover"
+            objectPosition="center"
+            rounded="lg"
+            src={healthapp}
+            alt="health app"
+          />
+          <Center h="50px" w="200px">
+            <Heading as="h3" size="md">
+              Health App
+            </Heading>
+            <FaExternalLinkAlt />
+          </Center>
+          <Box id="header-item" align="center" p={4}>
+            <Text fontSize="sm">Collect patient health data for reporting etc.</Text>
+          </Box>
         </Link>
-        </Flex>
-      </article> */}
+      </Flex>
     </>
   )
 }
