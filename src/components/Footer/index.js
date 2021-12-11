@@ -10,7 +10,7 @@ function Footer() {
       <Center h="10px" pt="5">
         <Text fontSize="xs">Proudly made with React and Chakra</Text>
       </Center>
-      <Center h="80px">
+     {/*  <Center h="80px">
         <Link
           href="https://reactjs.org/"
           target="_blank"
@@ -29,7 +29,7 @@ function Footer() {
             <img src={chakraLogo} alt="chakra logo" />
           </Box>
         </Link>
-      </Center>
+      </Center> */}
     </Box>
   )
 }
